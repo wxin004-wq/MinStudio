@@ -251,11 +251,63 @@ function ProjectCard({ project, onOpenGallery, onCategoryClick }) {
   );
 }
 
-function ProjectDetail({ slug }) {
-  const project = projects.find((p) => p.slug === slug);
+function ProjectCarousel({ title, images }) {
   const [index, setIndex] = useState(0);
 
-  useEffect(() => setIndex(0), [slug]);
+  useEffect(() => {
+    setIndex(0);
+  }, [images]);
+
+  if (!images.length) {
+    return <div className="project-cover-fallback">No images for this project</div>;
+  }
+
+  const prevImage = () => {
+    setIndex((current) => (current - 1 + images.length) % images.length);
+  };
+
+  const nextImage = () => {
+    setIndex((current) => (current + 1) % images.length);
+  };
+
+  return (
+    <div className="project-gallery">
+      <div className="project-main-shell">
+        <img src={images[index]} alt={`${title} image ${index + 1}`} />
+        {images.length > 1 && (
+          <>
+            <div className="carousel-count">
+              {String(index + 1).padStart(2, '0')} / {String(images.length).padStart(2, '0')}
+            </div>
+            <div className="carousel-controls">
+              <button type="button" onClick={prevImage} aria-label="Previous image">‹</button>
+              <button type="button" onClick={nextImage} aria-label="Next image">›</button>
+            </div>
+          </>
+        )}
+      </div>
+      {images.length > 1 && (
+        <div className="project-thumbnails" aria-label={`${title} thumbnails`}>
+          {images.map((image, imageIndex) => (
+            <button
+              key={image}
+              type="button"
+              className={imageIndex === index ? 'active' : ''}
+              onClick={() => setIndex(imageIndex)}
+              aria-label={`View image ${imageIndex + 1}`}
+              aria-pressed={imageIndex === index}
+            >
+              <img src={image} alt="" />
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ProjectDetail({ slug }) {
+  const project = projects.find((p) => p.slug === slug);
 
   if (!project) {
     return (
@@ -266,31 +318,31 @@ function ProjectDetail({ slug }) {
     );
   }
 
-  const images = project.images || [];
-
   return (
     <section className="page-section project-detail" aria-labelledby="project-title">
-      <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-        <div style={{ marginBottom: 28 }}>
+      <div className="project-detail-inner">
+        <div className="project-detail-nav">
           <a href="#projects">← Back to Projects</a>
         </div>
-        <h2 id="project-title" style={{ margin: '0 0 8px' }}>{project.title}</h2>
-        <p style={{ margin: 0, color: '#555' }}>{project.location}</p>
-
-        <div className="project-main-image" style={{ marginTop: 40 }}>
-          {images.length ? (
-            <div className="project-main-shell">
-              <img src={images[index]} alt={`${project.title} image ${index + 1}`} />
-              {images.length > 1 && (
-                <div className="carousel-controls">
-                  <button onClick={() => setIndex((i) => (i - 1 + images.length) % images.length)} aria-label="Previous image">‹</button>
-                  <button onClick={() => setIndex((i) => (i + 1) % images.length)} aria-label="Next image">›</button>
-                </div>
-              )}
+        <div className="project-detail-header">
+          <div>
+            <p className="project-detail-label">Project</p>
+            <h2 id="project-title">{project.title}</h2>
+          </div>
+          <dl className="project-detail-meta">
+            <div>
+              <dt>Location</dt>
+              <dd>{project.location}</dd>
             </div>
-          ) : (
-            <div className="project-cover-fallback">No images for this project</div>
-          )}
+            <div>
+              <dt>Category</dt>
+              <dd>{project.category}</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div className="project-main-image">
+          <ProjectCarousel title={project.title} images={project.images || []} />
         </div>
       </div>
     </section>
@@ -434,7 +486,7 @@ export default function App() {
   const renderRoute = () => {
     if (route.startsWith('#project/')) {
       const slug = route.replace('#project/', '');
-      return <ProjectDetail slug={slug} />;
+      return <ProjectDetail key={slug} slug={slug} />;
     }
     if (route === '#projects') return <Projects />;
     if (route === '#products' || route === '#services') return <Products />;
