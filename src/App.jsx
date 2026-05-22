@@ -320,9 +320,6 @@ function ProjectCarousel({ title, images }) {
           >
             <img src={images[index]} alt={`${title} image ${index + 1}`} />
           </button>
-          <div className="carousel-count">
-            {String(index + 1).padStart(2, '0')} / {String(images.length).padStart(2, '0')}
-          </div>
         </div>
         {images.length > 1 && (
           <button className="carousel-arrow carousel-arrow-next" type="button" onClick={nextImage} aria-label="Next image">›</button>
