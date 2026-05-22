@@ -549,7 +549,7 @@ main {
   grid-template-columns: minmax(0, 1fr) minmax(260px, 0.42fr);
   gap: clamp(28px, 6vw, 96px);
   align-items: end;
-  margin-bottom: clamp(24px, 3.5vw, 44px);
+  margin-bottom: clamp(18px, 2.4vw, 30px);
 }
 
 .project-detail-label {
@@ -602,7 +602,7 @@ main {
 
 .project-gallery {
   display: grid;
-  gap: 18px;
+  gap: 10px;
 }
 
 .project-carousel-frame {
@@ -630,7 +630,7 @@ main {
 
 .project-main-shell img {
   width: 100%;
-  height: clamp(280px, 42vh, 460px);
+  height: clamp(260px, 38vh, 420px);
   display: block;
   object-fit: contain;
 }
@@ -677,12 +677,16 @@ main {
 }
 
 .project-thumbnails {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(84px, 1fr));
-  gap: 10px;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  overflow-x: auto;
+  padding: 0 2px;
 }
 
 .project-thumbnails button {
+  flex: 0 0 58px;
   padding: 0;
   border: none;
   background: transparent;
