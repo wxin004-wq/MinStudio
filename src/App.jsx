@@ -185,7 +185,21 @@ const products = [
   { name: 'Object', material: 'Ceramic, cast bronze' },
 ];
 
-function Header() {
+const stylingProjects = [
+  { title: 'Private Apartment', location: 'Shanghai, China', category: 'Residential Styling' },
+  { title: 'Table Composition', location: 'Hangzhou, China', category: 'Object Styling' },
+  { title: 'Hotel Suite', location: 'Ningbo, China', category: 'Hospitality Styling' },
+  { title: 'Material Study', location: 'Shanghai, China', category: 'Editorial Styling' },
+  { title: 'Seasonal Room', location: 'Suzhou, China', category: 'Residential Styling' },
+  { title: 'Still Life', location: 'Shanghai, China', category: 'Object Styling' },
+];
+
+function Header({ route }) {
+  const isActive = (target) => {
+    if (target === '#projects') return route === '#projects' || route.startsWith('#project/');
+    return route === target;
+  };
+
   return (
     <header className="site-header">
       <a className="brand" href="#home" aria-label="Min Studio home">
@@ -193,9 +207,10 @@ function Header() {
       </a>
       <nav className="main-nav" aria-label="Main navigation">
         
-        <a href="#projects">Projects</a>
-        <a href="#products">Products</a>
-        <a href="#contact">Contact</a>
+        <a className={isActive('#projects') ? 'active' : ''} href="#projects">Projects</a>
+        <a className={isActive('#products') ? 'active' : ''} href="#products">Products</a>
+        <a className={isActive('#styling') ? 'active' : ''} href="#styling">Styling</a>
+        <a className={isActive('#contact') ? 'active' : ''} href="#contact">Contact</a>
       </nav>
     </header>
   );
@@ -447,25 +462,47 @@ function Products() {
   );
 }
 
+function Styling() {
+  return (
+    <section className="page-section styling-section" id="styling" aria-label="Styling">
+      <div className="project-grid">
+        {stylingProjects.map((project) => (
+          <article className="project-card styling-card" key={`${project.title}-${project.location}`}>
+            <div className="project-cover styling-cover" aria-label={`${project.title} image placeholder`} />
+            <div className="project-copy">
+              <h3>{project.title}</h3>
+              <p>{project.location}</p>
+            </div>
+            <div className="card-meta">
+              <span>{project.category}</span>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function Contact() {
   return (
     <section className="contact-section" id="contact">
       <address className="contact-list">
         <div className="company-info">
+          <p className="contact-heading">Contact</p>
+
           <div className="company-name">
             <p>上海敏恩室内设计咨询有限公司</p>
             <p>MIN.STUDIO DESIGN CONSULTANT SHANGHAI LTD.</p>
           </div>
-          
+
           <div className="company-address">
             <p>上海市徐汇区淮海中路1273弄19B</p>
-            <p>NO.19B, LANE 1273 HUAIHAI ZHONG ROAD,</p>
-            <p>XUHUI DISTRICT, SHANGHAI, P.R. CHINA 200031</p>
+            <p className="company-address-en">NO.19B, LANE 1273 HUAIHAI ZHONG ROAD,</p>
+            <p className="company-address-en">XUHUI DISTRICT, SHANGHAI, P.R. CHINA 200031</p>
           </div>
-          
+
           <div className="company-contact">
             <p>T: <a href="tel:+862154015398">+86 021 5401 5398</a></p>
-            <p>M: <a href="tel:+8618616644727">+86 186 1664 4727</a></p>
             <p>E: <a href="mailto:info@min-studio.net">info@min-studio.net</a></p>
           </div>
         </div>
@@ -483,6 +520,10 @@ export default function App() {
     return () => window.removeEventListener('hashchange', onHash);
   }, []);
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  }, [route]);
+
   const renderRoute = () => {
     if (route.startsWith('#project/')) {
       const slug = route.replace('#project/', '');
@@ -490,6 +531,7 @@ export default function App() {
     }
     if (route === '#projects') return <Projects />;
     if (route === '#products' || route === '#services') return <Products />;
+    if (route === '#styling') return <Styling />;
     if (route === '#contact') return <Contact />;
 
     // Home route: single calm landing section
@@ -503,7 +545,7 @@ export default function App() {
 
   return (
     <>
-      <Header />
+      <Header route={route} />
       <main>
         {renderRoute()}
       </main>
