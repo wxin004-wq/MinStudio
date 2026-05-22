@@ -637,12 +637,12 @@ main {
 
 .carousel-count {
   position: absolute;
-  left: 18px;
-  bottom: 16px;
-  padding: 6px 9px;
-  background: rgba(247, 245, 241, 0.82);
-  color: #242424;
-  font-size: 11px;
+  left: 12px;
+  bottom: 10px;
+  padding: 0;
+  background: transparent;
+  color: rgba(0, 0, 0, 0.42);
+  font-size: 8px;
   line-height: 1;
 }
 
