@@ -952,20 +952,25 @@ p.company-address-en {
     position: absolute;
     top: 50%;
     z-index: 2;
+    width: 30px;
+    height: 48px;
     transform: translateY(-50%);
-    background: rgba(247, 245, 241, 0.5);
+    background: transparent;
+    color: rgba(0, 0, 0, 0.34);
+    font-size: 26px;
   }
 
   .carousel-arrow:hover {
+    color: rgba(0, 0, 0, 0.62);
     transform: translateY(-50%) scale(1.04);
   }
 
   .carousel-arrow-prev {
-    left: 10px;
+    left: 4px;
   }
 
   .carousel-arrow-next {
-    right: 10px;
+    right: 4px;
   }
 
   .product-grid {
@@ -1017,5 +1022,154 @@ p.company-address-en {
   .main-nav {
     width: 100%;
     justify-content: space-between;
+  }
+}
+
+@media (max-width: 760px) {
+  .site-header {
+    gap: 14px;
+    padding: 18px clamp(16px, 5vw, 24px);
+  }
+
+  .brand {
+    font-size: 15px;
+    letter-spacing: 0.1em;
+  }
+
+  .main-nav {
+    gap: clamp(12px, 4vw, 20px);
+    flex-wrap: wrap;
+  }
+
+  .main-nav a {
+    font-size: 9px;
+    line-height: 1.6;
+    letter-spacing: 0.11em;
+  }
+
+  main {
+    padding: 0 clamp(16px, 5vw, 24px) 36px;
+  }
+
+  .home-landing {
+    min-height: auto;
+    padding: 28px 0 36px;
+  }
+
+  .home-landing-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .home-landing-image {
+    height: clamp(260px, 52svh, 420px);
+  }
+
+  .project-detail {
+    padding-top: 18px;
+  }
+
+  .project-detail-nav {
+    margin-bottom: 18px;
+  }
+
+  .project-detail-nav a,
+  .project-detail-label,
+  .project-detail-meta dt,
+  .project-detail-meta dd {
+    font-size: 10px;
+  }
+
+  .project-detail-header {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    margin-bottom: 22px;
+  }
+
+  .project-detail-header h2 {
+    font-size: clamp(18px, 7vw, 26px);
+    line-height: 1.16;
+  }
+
+  .project-detail-meta {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .project-main-image {
+    max-width: 100%;
+  }
+
+  .project-main-shell img {
+    height: clamp(260px, 52svh, 430px);
+  }
+
+  .project-gallery {
+    gap: 8px;
+  }
+
+  .project-thumbnails {
+    gap: 6px;
+    justify-content: flex-start;
+    padding-bottom: 2px;
+  }
+
+  .project-thumbnails button {
+    flex-basis: 44px;
+    height: 34px;
+  }
+
+  .fullscreen-viewer {
+    padding: 44px 16px;
+  }
+
+  .fullscreen-viewer img {
+    max-width: 94vw;
+    max-height: 78svh;
+  }
+
+  .fullscreen-close {
+    top: 14px;
+    right: 14px;
+  }
+
+  .fullscreen-arrow-prev {
+    left: 12px;
+  }
+
+  .fullscreen-arrow-next {
+    right: 12px;
+  }
+
+  .contact-section {
+    min-height: calc(100svh - 70px);
+    padding: 56px 0;
+  }
+
+  .contact-list {
+    max-width: min(360px, 100%);
+  }
+}
+
+@media (max-width: 420px) {
+  .site-header {
+    align-items: flex-start;
+  }
+
+  .main-nav {
+    gap: 10px 14px;
+    justify-content: flex-start;
+  }
+
+  .main-nav a {
+    font-size: 8.5px;
+  }
+
+  .project-detail-meta {
+    gap: 12px;
+  }
+
+  .project-main-shell img {
+    height: clamp(240px, 48svh, 380px);
   }
 }
