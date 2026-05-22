@@ -268,10 +268,30 @@ function ProjectCard({ project, onOpenGallery, onCategoryClick }) {
 
 function ProjectCarousel({ title, images }) {
   const [index, setIndex] = useState(0);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   useEffect(() => {
     setIndex(0);
+    setIsFullscreen(false);
   }, [images]);
+
+  useEffect(() => {
+    if (!isFullscreen) return undefined;
+
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') setIsFullscreen(false);
+      if (event.key === 'ArrowLeft') prevImage();
+      if (event.key === 'ArrowRight') nextImage();
+    };
+
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', onKeyDown);
+
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', onKeyDown);
+    };
+  }, [isFullscreen]);
 
   if (!images.length) {
     return <div className="project-cover-fallback">No images for this project</div>;
@@ -287,18 +307,25 @@ function ProjectCarousel({ title, images }) {
 
   return (
     <div className="project-gallery">
-      <div className="project-main-shell">
-        <img src={images[index]} alt={`${title} image ${index + 1}`} />
+      <div className="project-carousel-frame">
         {images.length > 1 && (
-          <>
-            <div className="carousel-count">
-              {String(index + 1).padStart(2, '0')} / {String(images.length).padStart(2, '0')}
-            </div>
-            <div className="carousel-controls">
-              <button type="button" onClick={prevImage} aria-label="Previous image">‹</button>
-              <button type="button" onClick={nextImage} aria-label="Next image">›</button>
-            </div>
-          </>
+          <button className="carousel-arrow carousel-arrow-prev" type="button" onClick={prevImage} aria-label="Previous image">‹</button>
+        )}
+        <div className="project-main-shell">
+          <button
+            className="project-main-button"
+            type="button"
+            onClick={() => setIsFullscreen(true)}
+            aria-label={`Open ${title} image ${index + 1} fullscreen`}
+          >
+            <img src={images[index]} alt={`${title} image ${index + 1}`} />
+          </button>
+          <div className="carousel-count">
+            {String(index + 1).padStart(2, '0')} / {String(images.length).padStart(2, '0')}
+          </div>
+        </div>
+        {images.length > 1 && (
+          <button className="carousel-arrow carousel-arrow-next" type="button" onClick={nextImage} aria-label="Next image">›</button>
         )}
       </div>
       {images.length > 1 && (
@@ -315,6 +342,50 @@ function ProjectCarousel({ title, images }) {
               <img src={image} alt="" />
             </button>
           ))}
+        </div>
+      )}
+      {isFullscreen && (
+        <div
+          className="fullscreen-viewer"
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${title} fullscreen image`}
+          onClick={() => setIsFullscreen(false)}
+        >
+          <button className="fullscreen-close" type="button" onClick={() => setIsFullscreen(false)} aria-label="Close fullscreen image">
+            ×
+          </button>
+          {images.length > 1 && (
+            <button
+              className="fullscreen-arrow fullscreen-arrow-prev"
+              type="button"
+              onClick={(event) => {
+                event.stopPropagation();
+                prevImage();
+              }}
+              aria-label="Previous image"
+            >
+              ‹
+            </button>
+          )}
+          <img
+            src={images[index]}
+            alt={`${title} image ${index + 1}`}
+            onClick={(event) => event.stopPropagation()}
+          />
+          {images.length > 1 && (
+            <button
+              className="fullscreen-arrow fullscreen-arrow-next"
+              type="button"
+              onClick={(event) => {
+                event.stopPropagation();
+                nextImage();
+              }}
+              aria-label="Next image"
+            >
+              ›
+            </button>
+          )}
         </div>
       )}
     </div>
