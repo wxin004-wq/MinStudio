@@ -452,11 +452,6 @@ function Contact() {
     <section className="contact-section" id="contact">
       <address className="contact-list">
         <div className="company-info">
-          <div className="company-name">
-            <p>上海敏恩室内设计咨询有限公司</p>
-            <p>MIN.STUDIO DESIGN CONSULTANT SHANGHAI LTD.</p>
-          </div>
-          
           <div className="company-address">
             <p>上海市徐汇区淮海中路1273弄19B</p>
             <p>NO.19B, LANE 1273 HUAIHAI ZHONG ROAD,</p>
@@ -467,6 +462,11 @@ function Contact() {
             <p>T: <a href="tel:+862154015398">+86 021 5401 5398</a></p>
             <p>M: <a href="tel:+8618616644727">+86 186 1664 4727</a></p>
             <p>E: <a href="mailto:info@min-studio.net">info@min-studio.net</a></p>
+          </div>
+
+          <div className="company-name">
+            <p>上海敏恩室内设计咨询有限公司</p>
+            <p>MIN.STUDIO DESIGN CONSULTANT SHANGHAI LTD.</p>
           </div>
         </div>
       </address>
