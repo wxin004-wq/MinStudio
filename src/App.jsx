@@ -181,49 +181,60 @@ const copy = {
   },
 };
 
-const imageModules = import.meta.glob('./assets/**/*.{jpg,jpeg,png,webp}', {
+const homeModules = import.meta.glob('./assets/home/*.{jpg,jpeg,png,webp}', {
   eager: true,
   query: '?url',
   import: 'default',
 });
-const projectImages = {};
-
-Object.entries(imageModules).forEach(([path, url]) => {
-  const normalizedPath = path.replace(/\\/g, '/').replace(/^\.\//, '');
-  const match = normalizedPath.match(/^assets\/projects\/([^/]+)\//);
-  if (!match) return;
-  const projectFolder = match[1];
-
-  projectImages[projectFolder] = projectImages[projectFolder] || [];
-  projectImages[projectFolder].push(url);
+const homeSlideModules = import.meta.glob('./assets/home-slides/*.{jpg,jpeg,png,webp}', {
+  eager: true,
+  query: '?url',
+  import: 'default',
+});
+const projectCoverModules = import.meta.glob('./assets/projects/*/01.{jpg,jpeg,png,webp}', {
+  eager: true,
+  query: '?url',
+  import: 'default',
+});
+const projectImageLoaders = import.meta.glob([
+  './assets/projects/*/*.{jpg,jpeg,png,webp}',
+  '!./assets/projects/*/01.{jpg,jpeg,png,webp}',
+], {
+  query: '?url',
+  import: 'default',
 });
 
-const projects = rawProjects.map((project) => {
-  const images = (projectImages[project.imageFolder] || []).sort((a, b) => {
-    const index = (src) => {
-      const match = src.match(/(\d+)\.[a-z]+$/i);
-      return match ? Number(match[1]) : 0;
-    };
-    return index(a) - index(b);
-  });
+const getProjectFolder = (path) => path.replace(/\\/g, '/').match(/assets\/projects\/([^/]+)\//)?.[1] || '';
+const getImageIndex = (path) => {
+  const match = path.match(/\/(\d+)\.[a-z]+$/i);
+  return match ? Number(match[1]) : 0;
+};
 
+const projectCovers = Object.entries(projectCoverModules).reduce((covers, [path, url]) => {
+  covers[getProjectFolder(path)] = url;
+  return covers;
+}, {});
+
+const loadProjectImages = async (project) => {
+  const entries = Object.entries(projectImageLoaders)
+    .filter(([path]) => getProjectFolder(path) === project.imageFolder)
+    .sort(([a], [b]) => getImageIndex(a) - getImageIndex(b));
+  const urls = await Promise.all(entries.map(([, load]) => load()));
+  return [project.cover, ...urls].filter(Boolean);
+};
+
+const projects = rawProjects.map((project) => {
   return {
     ...project,
-    images,
-    cover: images[0] || null,
+    cover: projectCovers[project.imageFolder] || null,
   };
 });
 
-const homeImage = Object.entries(imageModules).find(([path]) => /assets\/home\//i.test(path))?.[1] || projects[0]?.cover || null;
-const customHomeSlides = Object.entries(imageModules)
-  .filter(([path]) => /assets\/home-slides\//i.test(path))
+const homeImage = Object.values(homeModules)[0] || projects[0]?.cover || null;
+const customHomeSlides = Object.entries(homeSlideModules)
   .sort(([a], [b]) => a.localeCompare(b))
   .map(([, url]) => url);
-const yixingHomeImages = Object.entries(imageModules)
-  .filter(([path]) => /assets\/projects\/the-unbound-collection-by-hyatt-yixing-china\//i.test(path))
-  .sort(([a], [b]) => a.localeCompare(b))
-  .map(([, url]) => url);
-const homeSlides = customHomeSlides.length ? customHomeSlides : yixingHomeImages.length ? yixingHomeImages : [homeImage].filter(Boolean);
+const homeSlides = customHomeSlides.length ? customHomeSlides : [homeImage].filter(Boolean);
 const projectCategories = ['residential', 'hotels'];
 const localized = (value, lang) => {
   if (Array.isArray(value)) return lang === 'cn' ? value[1] : value[0];
@@ -315,7 +326,7 @@ function ProjectCard({ project, lang, onOpenGallery, onCategoryClick }) {
     >
       <div className="project-cover">
         {project.cover ? (
-          <img src={project.cover} alt={`${projectTitle} cover`} />
+          <img src={project.cover} alt={`${projectTitle} cover`} loading="lazy" decoding="async" />
         ) : (
           <div className="project-cover-fallback">{t.project.coverComing}</div>
         )}
@@ -394,7 +405,7 @@ function ProjectCarousel({ title, images, lang }) {
             onClick={() => setIsFullscreen(true)}
             aria-label={`${t.project.openFullscreen}: ${title} ${index + 1}`}
           >
-            <img src={images[index]} alt={`${title} ${t.project.image} ${index + 1}`} />
+            <img src={images[index]} alt={`${title} ${t.project.image} ${index + 1}`} decoding="async" />
           </button>
         </div>
         {images.length > 1 && (
@@ -412,7 +423,7 @@ function ProjectCarousel({ title, images, lang }) {
               aria-label={`${t.project.image} ${imageIndex + 1}`}
               aria-pressed={imageIndex === index}
             >
-              <img src={image} alt="" />
+              <img src={image} alt="" loading="lazy" decoding="async" />
             </button>
           ))}
         </div>
@@ -441,7 +452,7 @@ function ProjectCarousel({ title, images, lang }) {
               ‹
             </button>
           )}
-          <img src={images[index]} alt={`${title} ${t.project.image} ${index + 1}`} onClick={(event) => event.stopPropagation()} />
+          <img src={images[index]} alt={`${title} ${t.project.image} ${index + 1}`} decoding="async" onClick={(event) => event.stopPropagation()} />
           {images.length > 1 && (
             <button
               className="fullscreen-arrow fullscreen-arrow-next"
@@ -463,8 +474,31 @@ function ProjectCarousel({ title, images, lang }) {
 
 function ProjectDetail({ slug, lang }) {
   const project = projects.find((p) => p.slug === slug);
+  const [images, setImages] = useState([]);
+  const [isLoadingImages, setIsLoadingImages] = useState(true);
   const t = copy[lang];
   const projectTitle = project ? localized(project.title, lang) : '';
+
+  useEffect(() => {
+    let isMounted = true;
+
+    if (!project) {
+      setImages([]);
+      setIsLoadingImages(false);
+      return undefined;
+    }
+
+    setIsLoadingImages(true);
+    loadProjectImages(project).then((loadedImages) => {
+      if (!isMounted) return;
+      setImages(loadedImages);
+      setIsLoadingImages(false);
+    });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [project?.imageFolder]);
 
   if (!project) {
     return (
@@ -499,7 +533,11 @@ function ProjectDetail({ slug, lang }) {
         </div>
 
         <div className="project-main-image">
-          <ProjectCarousel title={projectTitle} images={project.images || []} lang={lang} />
+          {isLoadingImages ? (
+            <div className="project-cover-fallback">{t.project.coverComing}</div>
+          ) : (
+            <ProjectCarousel title={projectTitle} images={images} lang={lang} />
+          )}
         </div>
       </div>
     </section>
