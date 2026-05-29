@@ -191,6 +191,10 @@ main {
   opacity: 1;
 }
 
+.home-background-slide-mobile {
+  display: none;
+}
+
 .home-landing-grid {
   display: grid;
   grid-template-columns: minmax(320px, 1.1fr) minmax(360px, 0.9fr);
@@ -283,6 +287,15 @@ main {
 }
 
 @media (max-width: 720px) {
+  .home-background-slide-desktop {
+    display: none;
+  }
+
+  .home-background-slide-mobile {
+    display: block;
+    background-position: center;
+  }
+
   .home-landing {
     padding: clamp(28px, 7vw, 48px) 0;
     min-height: auto;

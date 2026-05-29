@@ -191,6 +191,11 @@ const homeSlideModules = import.meta.glob('./assets/home-slides/*.{jpg,jpeg,png,
   query: '?url',
   import: 'default',
 });
+const mobileHomeSlideModules = import.meta.glob('./assets/home-mobile-web/*.{jpg,jpeg,png,webp}', {
+  eager: true,
+  query: '?url',
+  import: 'default',
+});
 const projectCoverModules = import.meta.glob('./assets/projects/*/01.{jpg,jpeg,png,webp}', {
   eager: true,
   query: '?url',
@@ -235,6 +240,9 @@ const customHomeSlides = Object.entries(homeSlideModules)
   .sort(([a], [b]) => a.localeCompare(b))
   .map(([, url]) => url);
 const homeSlides = customHomeSlides.length ? customHomeSlides : [homeImage].filter(Boolean);
+const mobileHomeSlides = Object.entries(mobileHomeSlideModules)
+  .sort(([a], [b]) => a.localeCompare(b))
+  .map(([, url]) => url);
 const projectCategories = ['residential', 'hotels'];
 const localized = (value, lang) => {
   if (Array.isArray(value)) return lang === 'cn' ? value[1] : value[0];
@@ -561,9 +569,10 @@ function HomeLanding({ lang }) {
   const [slideIndex, setSlideIndex] = useState(0);
 
   useEffect(() => {
-    if (homeSlides.length < 2) return undefined;
+    const maxSlides = Math.max(homeSlides.length, mobileHomeSlides.length);
+    if (maxSlides < 2) return undefined;
     const timer = window.setInterval(() => {
-      setSlideIndex((current) => (current + 1) % homeSlides.length);
+      setSlideIndex((current) => (current + 1) % maxSlides);
     }, 2500);
 
     return () => window.clearInterval(timer);
@@ -574,7 +583,14 @@ function HomeLanding({ lang }) {
       <div className="home-background" aria-hidden="true">
         {homeSlides.map((image, index) => (
           <div
-            className={`home-background-slide${index === slideIndex ? ' active' : ''}`}
+            className={`home-background-slide home-background-slide-desktop${index === slideIndex % homeSlides.length ? ' active' : ''}`}
+            key={image}
+            style={{ backgroundImage: `url(${image})` }}
+          />
+        ))}
+        {mobileHomeSlides.map((image, index) => (
+          <div
+            className={`home-background-slide home-background-slide-mobile${index === slideIndex % mobileHomeSlides.length ? ' active' : ''}`}
             key={image}
             style={{ backgroundImage: `url(${image})` }}
           />
