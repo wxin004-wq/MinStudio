@@ -158,10 +158,37 @@ main {
 }
 
 .home-landing {
+  position: relative;
+  width: 100vw;
+  margin-left: 50%;
+  overflow: hidden;
+  transform: translateX(-50%);
   padding: clamp(28px, 4vw, 56px) 0 clamp(36px, 5vw, 64px);
   min-height: calc(100svh - 92px);
   display: grid;
   align-items: center;
+  background: var(--page-bg);
+}
+
+.home-background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.home-background-slide {
+  position: absolute;
+  inset: 0;
+  background-position: center;
+  background-size: cover;
+  opacity: 0;
+  filter: saturate(75%);
+  transition: opacity 900ms ease;
+}
+
+.home-background-slide.active {
+  opacity: 1;
 }
 
 .home-landing-grid {
