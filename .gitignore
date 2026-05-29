@@ -4,3 +4,4 @@ node_modules/
 node_modules/.vite/
 dist/
 src/assets/home-mobile/
+src/assets/home-slides/

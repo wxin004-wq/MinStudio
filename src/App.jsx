@@ -186,7 +186,7 @@ const homeModules = import.meta.glob('./assets/home/*.{jpg,jpeg,png,webp}', {
   query: '?url',
   import: 'default',
 });
-const homeSlideModules = import.meta.glob('./assets/home-slides/*.{jpg,jpeg,png,webp}', {
+const homeSlideModules = import.meta.glob('./assets/home-slides-web/*.{jpg,jpeg,png,webp}', {
   eager: true,
   query: '?url',
   import: 'default',
