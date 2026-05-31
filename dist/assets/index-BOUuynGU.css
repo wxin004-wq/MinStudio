@@ -1219,7 +1219,9 @@ p.company-address-en {
   }
 
   .home-landing {
-    min-height: auto;
+    height: calc(100svh - 74px);
+    min-height: calc(100svh - 74px);
+    padding: 0;
   }
 
   .section-header {
@@ -1293,8 +1295,9 @@ p.company-address-en {
   }
 
   .home-landing {
-    min-height: auto;
-    padding: 28px 0 36px;
+    height: calc(100svh - 74px);
+    min-height: calc(100svh - 74px);
+    padding: 0;
   }
 
   .home-landing-grid {

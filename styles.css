@@ -284,6 +284,7 @@ main {
 
 @media (max-width: 720px) {
   .home-landing {
+    height: calc(100svh - 74px);
     min-height: calc(100svh - 74px);
     padding: 0;
   }
@@ -1012,7 +1013,9 @@ p.company-address-en {
   }
 
   .home-landing {
+    height: calc(100svh - 74px);
     min-height: calc(100svh - 74px);
+    padding: 0;
   }
 
   .section-header {
