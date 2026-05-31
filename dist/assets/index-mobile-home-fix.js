@@ -10884,10 +10884,10 @@ function ProjectDetail({ slug, lang }) {
 function HomeLanding({ lang }) {
 	const t = copy[lang].home;
 	const [slideIndex, setSlideIndex] = (0, import_react.useState)(0);
-	const [isMobileHome, setIsMobileHome] = (0, import_react.useState)(() => window.matchMedia("(max-width: 720px)").matches);
+	const [isMobileHome, setIsMobileHome] = (0, import_react.useState)(() => window.matchMedia("(max-width: 900px), (orientation: portrait)").matches);
 	const activeHomeSlides = isMobileHome && mobileHomeSlides.length ? mobileHomeSlides : homeSlides;
 	(0, import_react.useEffect)(() => {
-		const mediaQuery = window.matchMedia("(max-width: 720px)");
+		const mediaQuery = window.matchMedia("(max-width: 900px), (orientation: portrait)");
 		const updateHomeMode = () => {
 			setIsMobileHome(mediaQuery.matches);
 			setSlideIndex(0);

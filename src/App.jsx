@@ -567,11 +567,13 @@ function ProductCard({ product }) {
 function HomeLanding({ lang }) {
   const t = copy[lang].home;
   const [slideIndex, setSlideIndex] = useState(0);
-  const [isMobileHome, setIsMobileHome] = useState(() => window.matchMedia('(max-width: 720px)').matches);
+  const [isMobileHome, setIsMobileHome] = useState(() =>
+    window.matchMedia('(max-width: 900px), (orientation: portrait)').matches
+  );
   const activeHomeSlides = isMobileHome && mobileHomeSlides.length ? mobileHomeSlides : homeSlides;
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(max-width: 720px)');
+    const mediaQuery = window.matchMedia('(max-width: 900px), (orientation: portrait)');
     const updateMode = () => setIsMobileHome(mediaQuery.matches);
 
     updateMode();
