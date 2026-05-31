@@ -10377,8 +10377,8 @@ var homeSlideModules = /* @__PURE__ */ Object.assign({
 	"./assets/home-slides/大堂3 拷贝.jpg": 大堂3_拷贝_default,
 	"./assets/home-slides/酒吧1.jpg": 酒吧1_default
 });
-var desktopHomeSlides = ["/assets/desktop-home-01.jpg", "/assets/desktop-home-02.jpg", "/assets/desktop-home-03.jpg", "/assets/desktop-home-04.jpg"];
-var mobileHomeSlides = ["/assets/mobile-home-01.jpg", "/assets/mobile-home-02.jpg", "/assets/mobile-home-03.jpg", "/assets/mobile-home-04.jpg", "/assets/mobile-home-05.jpg", "/assets/mobile-home-06.jpg", "/assets/mobile-home-07.jpg", "/assets/mobile-home-08.jpg"];
+var desktopHomeSlides = ["/assets/desktop-home-01.jpg", "/assets/desktop-home-02.jpg", "/assets/desktop-home-03.jpg", "/assets/desktop-home-04.jpg", "/assets/desktop-home-05.jpg"];
+var mobileHomeSlides = ["/assets/mobile-home-01.jpg", "/assets/mobile-home-02.jpg", "/assets/mobile-home-03.jpg", "/assets/mobile-home-04.jpg", "/assets/mobile-home-05.jpg", "/assets/mobile-home-06.jpg", "/assets/mobile-home-07.jpg", "/assets/mobile-home-08.jpg", "/assets/mobile-home-09.jpg"];
 var projectCoverModules = /* @__PURE__ */ Object.assign({
 	"./assets/projects/artists-villa-yixing-china/01.jpg": _01_default$11,
 	"./assets/projects/boutique-hotel-jingdezhen-china/01.jpg": _01_default$10,
