@@ -567,36 +567,40 @@ function ProductCard({ product }) {
 function HomeLanding({ lang }) {
   const t = copy[lang].home;
   const [slideIndex, setSlideIndex] = useState(0);
+  const [isMobileHome, setIsMobileHome] = useState(() => window.matchMedia('(max-width: 720px)').matches);
+  const activeHomeSlides = isMobileHome && mobileHomeSlides.length ? mobileHomeSlides : homeSlides;
 
   useEffect(() => {
-    const maxSlides = Math.max(homeSlides.length, mobileHomeSlides.length);
-    if (maxSlides < 2) return undefined;
+    const mediaQuery = window.matchMedia('(max-width: 720px)');
+    const updateMode = () => setIsMobileHome(mediaQuery.matches);
+
+    updateMode();
+    mediaQuery.addEventListener('change', updateMode);
+    return () => mediaQuery.removeEventListener('change', updateMode);
+  }, []);
+
+  useEffect(() => {
+    setSlideIndex(0);
+    if (activeHomeSlides.length < 2) return undefined;
     const timer = window.setInterval(() => {
-      setSlideIndex((current) => (current + 1) % maxSlides);
+      setSlideIndex((current) => (current + 1) % activeHomeSlides.length);
     }, 2500);
 
     return () => window.clearInterval(timer);
-  }, []);
+  }, [activeHomeSlides.length]);
 
   return (
     <section className="home-landing" id="home" aria-label={t.aria}>
       <div className="home-background" aria-hidden="true">
-        {homeSlides.map((image, index) => (
+        {activeHomeSlides.map((image, index) => (
           <div
-            className={`home-background-slide home-background-slide-desktop${index === slideIndex % homeSlides.length ? ' active' : ''}`}
-            key={image}
-            style={{ backgroundImage: `url(${image})` }}
-          />
-        ))}
-        {mobileHomeSlides.map((image, index) => (
-          <div
-            className={`home-background-slide home-background-slide-mobile${index === slideIndex % mobileHomeSlides.length ? ' active' : ''}`}
+            className={`home-background-slide${index === slideIndex ? ' active' : ''}`}
             key={image}
             style={{ backgroundImage: `url(${image})` }}
           />
         ))}
       </div>
-      {!homeSlides.length && <div className="project-cover-fallback">{t.fallback}</div>}
+      {!activeHomeSlides.length && <div className="project-cover-fallback">{t.fallback}</div>}
     </section>
   );
 }
