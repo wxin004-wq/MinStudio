@@ -284,8 +284,8 @@ main {
 
 @media (max-width: 720px) {
   .home-landing {
-    padding: clamp(28px, 7vw, 48px) 0;
-    min-height: auto;
+    min-height: calc(100svh - 74px);
+    padding: 0;
   }
 
   .home-landing-image {
@@ -1012,7 +1012,7 @@ p.company-address-en {
   }
 
   .home-landing {
-    min-height: auto;
+    min-height: calc(100svh - 74px);
   }
 
   .section-header {
