@@ -214,6 +214,10 @@ const getImageIndex = (path) => {
   const match = path.match(/\/(\d+)\.[a-z]+$/i);
   return match ? Number(match[1]) : 0;
 };
+const comingSoonProjectSlugs = new Set([
+  'hyatt-place-yuhang-china',
+  'the-pujun-hotel-guangzhou-china',
+]);
 
 const projectCovers = Object.entries(projectCoverModules).reduce((covers, [path, url]) => {
   covers[getProjectFolder(path)] = url;
@@ -221,6 +225,8 @@ const projectCovers = Object.entries(projectCoverModules).reduce((covers, [path,
 }, {});
 
 const loadProjectImages = async (project) => {
+  if (project.isComingSoon) return [project.cover].filter(Boolean);
+
   const entries = Object.entries(projectImageLoaders)
     .filter(([path]) => getProjectFolder(path) === project.imageFolder)
     .sort(([a], [b]) => getImageIndex(a) - getImageIndex(b));
@@ -232,6 +238,7 @@ const projects = rawProjects.map((project) => {
   return {
     ...project,
     cover: projectCovers[project.imageFolder] || null,
+    isComingSoon: comingSoonProjectSlugs.has(project.slug),
   };
 });
 
@@ -323,7 +330,7 @@ function ProjectCard({ project, lang, onOpenGallery, onCategoryClick }) {
 
   return (
     <article
-      className="project-card"
+      className={`project-card${project.isComingSoon ? ' project-card-coming-soon' : ''}`}
       onClick={onOpenGallery}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') onOpenGallery();
@@ -338,6 +345,7 @@ function ProjectCard({ project, lang, onOpenGallery, onCategoryClick }) {
         ) : (
           <div className="project-cover-fallback">{t.project.coverComing}</div>
         )}
+        {project.isComingSoon && <span className="coming-soon-badge">Coming Soon...</span>}
       </div>
       <div className="project-copy">
         <h3>{projectTitle}</h3>
@@ -360,7 +368,7 @@ function ProjectCard({ project, lang, onOpenGallery, onCategoryClick }) {
   );
 }
 
-function ProjectCarousel({ title, images, lang }) {
+function ProjectCarousel({ title, images, lang, isComingSoon = false }) {
   const [index, setIndex] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const t = copy[lang];
@@ -401,7 +409,7 @@ function ProjectCarousel({ title, images, lang }) {
   }
 
   return (
-    <div className="project-gallery">
+    <div className={`project-gallery${isComingSoon ? ' project-gallery-coming-soon' : ''}`}>
       <div className="project-carousel-frame">
         {images.length > 1 && (
           <button className="carousel-arrow carousel-arrow-prev" type="button" onClick={prevImage} aria-label={t.project.previous}>‹</button>
@@ -414,6 +422,7 @@ function ProjectCarousel({ title, images, lang }) {
             aria-label={`${t.project.openFullscreen}: ${title} ${index + 1}`}
           >
             <img src={images[index]} alt={`${title} ${t.project.image} ${index + 1}`} decoding="async" />
+            {isComingSoon && <span className="coming-soon-badge">Coming Soon...</span>}
           </button>
         </div>
         {images.length > 1 && (
@@ -460,7 +469,10 @@ function ProjectCarousel({ title, images, lang }) {
               ‹
             </button>
           )}
-          <img src={images[index]} alt={`${title} ${t.project.image} ${index + 1}`} decoding="async" onClick={(event) => event.stopPropagation()} />
+          <div className="fullscreen-image-wrap" onClick={(event) => event.stopPropagation()}>
+            <img src={images[index]} alt={`${title} ${t.project.image} ${index + 1}`} decoding="async" />
+            {isComingSoon && <span className="coming-soon-badge">Coming Soon...</span>}
+          </div>
           {images.length > 1 && (
             <button
               className="fullscreen-arrow fullscreen-arrow-next"
@@ -544,7 +556,7 @@ function ProjectDetail({ slug, lang }) {
           {isLoadingImages ? (
             <div className="project-cover-fallback">{t.project.coverComing}</div>
           ) : (
-            <ProjectCarousel title={projectTitle} images={images} lang={lang} />
+            <ProjectCarousel title={projectTitle} images={images} lang={lang} isComingSoon={project.isComingSoon} />
           )}
         </div>
       </div>
