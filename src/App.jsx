@@ -258,6 +258,8 @@ const localized = (value, lang) => {
 
 function Header({ route, lang, onLanguageChange, isMenuOpen, onMenuToggle }) {
   const isHome = route === '#home' || route === '' || route === '#';
+  const menuLabel = lang === 'cn' ? '菜单' : 'Menu';
+  const backLabel = lang === 'cn' ? '返回' : 'Back';
 
   return (
     <header className={`site-header${isHome ? ' site-header-home' : ''}${isMenuOpen ? ' menu-is-open' : ''}`}>
@@ -272,7 +274,7 @@ function Header({ route, lang, onLanguageChange, isMenuOpen, onMenuToggle }) {
           aria-expanded={isMenuOpen}
           aria-controls="site-menu"
         >
-          {isMenuOpen ? 'Back' : 'Menu'}
+          {isMenuOpen ? backLabel : menuLabel}
         </button>
         <div className="language-toggle" aria-label="Language">
           <button type="button" className={lang === 'en' ? 'active' : ''} onClick={() => onLanguageChange('en')} aria-pressed={lang === 'en'}>
