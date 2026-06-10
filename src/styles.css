@@ -116,7 +116,7 @@ a {
 }
 
 .site-header-cn .menu-toggle {
-  font-family: var(--font-sans-cn), sans-serif;
+  font-family: "Source Han Sans SC", "Source Han Sans CN", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
   font-weight: 400;
 }
 
