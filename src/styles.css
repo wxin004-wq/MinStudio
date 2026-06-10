@@ -832,6 +832,10 @@ main {
   align-items: center;
 }
 
+.project-carousel-frame-single {
+  grid-template-columns: minmax(0, 1fr);
+}
+
 .project-main-shell {
   position: relative;
   overflow: hidden;

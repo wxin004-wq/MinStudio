@@ -410,7 +410,7 @@ function ProjectCarousel({ title, images, lang, isComingSoon = false }) {
 
   return (
     <div className={`project-gallery${isComingSoon ? ' project-gallery-coming-soon' : ''}`}>
-      <div className="project-carousel-frame">
+      <div className={`project-carousel-frame${images.length === 1 ? ' project-carousel-frame-single' : ''}`}>
         {images.length > 1 && (
           <button className="carousel-arrow carousel-arrow-prev" type="button" onClick={prevImage} aria-label={t.project.previous}>‹</button>
         )}
