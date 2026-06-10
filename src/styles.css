@@ -100,7 +100,7 @@ a {
   background: transparent;
   color: inherit;
   font-family: inherit;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 300;
   line-height: 1.7;
   letter-spacing: 0.16em;
@@ -110,7 +110,7 @@ a {
 
 .brand {
   font-family: var(--font-display-en), var(--font-sans-cn), serif;
-  font-size: 18px;
+  font-size: 20px;
   letter-spacing: 0.12em;
   font-weight: 500;
 }
@@ -221,7 +221,7 @@ a {
   gap: 16px;
   color: #0b0b0b;
   font-family: var(--font-serif-en), var(--font-sans-cn), serif;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 400;
   line-height: 1;
   letter-spacing: 0.32em;
@@ -1249,7 +1249,7 @@ p.company-address-en {
 
   .language-toggle {
     gap: 11px;
-    font-size: 12px;
+    font-size: 11px;
     letter-spacing: 0.24em;
   }
 
@@ -1306,7 +1306,7 @@ p.company-address-en {
   }
 
   .brand {
-    font-size: 15px;
+    font-size: 16px;
     letter-spacing: 0.1em;
   }
 
@@ -1325,12 +1325,13 @@ p.company-address-en {
     letter-spacing: 0.04em;
   }
 
+  .menu-toggle,
   .language-toggle,
   .home-intro,
   .home-philosophy-list article h3,
   .home-philosophy-list article p,
   .home-philosophy-closing p {
-    font-size: 9px;
+    font-size: 8px;
   }
 
   main {
