@@ -8,7 +8,7 @@
   --panel-bg: rgba(247, 245, 241, 0.9);
   --font-display-en: "Bodoni Moda", "Didot", "Bodoni 72", "Times New Roman", serif;
   --font-serif-en: "Prata", "Georgia", "Times New Roman", serif;
-  --font-sans-cn: "Noto Sans SC", "Source Han Sans SC", "Source Han Sans CN", "PingFang SC", "Microsoft YaHei";
+  --font-sans-cn: "Source Han Sans SC", "Source Han Sans CN", "Noto Sans SC", "PingFang SC", "Microsoft YaHei";
   font-family:
     var(--font-serif-en), var(--font-sans-cn), serif;
   font-synthesis: none;
@@ -29,6 +29,10 @@ body {
   min-width: 320px;
   background: var(--page-bg);
   font-family: var(--font-serif-en), var(--font-sans-cn), serif;
+}
+
+[lang="zh-CN"] {
+  font-family: var(--font-sans-cn), sans-serif;
 }
 
 a {
