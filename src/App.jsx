@@ -103,7 +103,7 @@ const copy = {
     contact: 'Contact',
   },
   cn: {
-    nav: { projects: '项目', products: '产品', styling: '陈设', studio: '工作室', contact: '联系' },
+    nav: { projects: '项目', products: '产品', styling: '陈设', studio: '简介', contact: '联系' },
     categories: { all: '全部', residential: '住宅', hotels: '酒店', restaurant: '餐厅与酒吧' },
     home: {
       aria: '首页',

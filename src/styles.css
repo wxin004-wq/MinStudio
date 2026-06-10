@@ -188,6 +188,7 @@ a {
 }
 
 .main-nav-cn a {
+  font-family: var(--font-sans-cn), sans-serif;
   letter-spacing: 0.04em;
   font-weight: 500;
 }
@@ -291,6 +292,7 @@ a {
 }
 
 .menu-panel-nav.main-nav-cn a {
+  font-family: var(--font-sans-cn), sans-serif;
   font-weight: 500;
   letter-spacing: 0.04em;
 }
