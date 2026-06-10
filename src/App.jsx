@@ -262,7 +262,7 @@ function Header({ route, lang, onLanguageChange, isMenuOpen, onMenuToggle }) {
   const backLabel = lang === 'cn' ? '返回' : 'Back';
 
   return (
-    <header className={`site-header${isHome ? ' site-header-home' : ''}${isMenuOpen ? ' menu-is-open' : ''}`}>
+    <header className={`site-header${isHome ? ' site-header-home' : ''}${isMenuOpen ? ' menu-is-open' : ''}${lang === 'cn' ? ' site-header-cn' : ''}`}>
       <a className="brand" href="#home" aria-label="Min Studio home">
         MIN STUDIO
       </a>
