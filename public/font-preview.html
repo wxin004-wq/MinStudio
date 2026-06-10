@@ -3,11 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Font Preview</title>
+    <title>Serif Font Preview</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500&family=DM+Sans:wght@300;400;500&family=Hanken+Grotesk:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500&family=Instrument+Sans:wght@400;500&family=Jost:wght@300;400;500&family=Lato:wght@300;400;700&family=Manrope:wght@300;400;500&family=Noto+Sans+SC:wght@300;400;500&family=Plus+Jakarta+Sans:wght@300;400;500&family=Raleway:wght@300;400;500&family=Sora:wght@300;400;500&family=Source+Sans+3:wght@300;400;500&family=Urbanist:wght@300;400;500&family=Work+Sans:wght@300;400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Libre+Bodoni:wght@400;500&family=Noto+Sans+SC:wght@300;400;500&family=Playfair+Display:wght@400;500&family=Prata&display=swap"
       rel="stylesheet"
     />
     <style>
@@ -18,29 +18,36 @@
         -webkit-font-smoothing: antialiased;
       }
 
+      * {
+        box-sizing: border-box;
+      }
+
       body {
         margin: 0;
         background: #f7f5f1;
       }
 
       main {
-        width: min(1180px, calc(100vw - 80px));
+        width: min(1220px, calc(100vw - 72px));
         margin: 0 auto;
-        padding: 54px 0 64px;
+        padding: 48px 0 72px;
       }
 
       .sheet-title {
-        margin: 0 0 38px;
-        font: 400 12px/1.5 "Manrope", "Noto Sans SC", sans-serif;
+        margin: 0 0 36px;
+        font-family: "Noto Sans SC", sans-serif;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 1.7;
         letter-spacing: 0.18em;
         text-transform: uppercase;
       }
 
       .sample {
         display: grid;
-        grid-template-columns: 210px minmax(0, 1fr);
-        gap: 48px;
-        padding: 30px 0;
+        grid-template-columns: 230px minmax(0, 1fr);
+        gap: 54px;
+        padding: 38px 0 44px;
         border-top: 1px solid rgba(0, 0, 0, 0.12);
       }
 
@@ -50,265 +57,153 @@
 
       .name {
         margin: 2px 0 0;
-        color: #666;
+        color: #666666;
+        font-family: "Noto Sans SC", sans-serif;
         font-size: 12px;
-        line-height: 1.6;
-        letter-spacing: 0.06em;
+        font-weight: 400;
+        line-height: 1.7;
+      }
+
+      .note {
+        display: block;
+        margin-top: 8px;
+        color: #8a8a8a;
       }
 
       .logo {
-        margin: 0 0 16px;
-        font-size: 28px;
-        font-weight: 500;
-        line-height: 1;
-        letter-spacing: 0.16em;
-      }
-
-      .logo.alt {
-        margin-bottom: 24px;
-        font-size: 18px;
+        margin: 0 0 22px;
+        font-size: clamp(48px, 7vw, 92px);
         font-weight: 400;
-        letter-spacing: 0.28em;
+        line-height: 1;
+        letter-spacing: 0.08em;
         text-transform: uppercase;
       }
 
       .menu {
-        margin: 0 0 22px;
+        margin: 0 0 32px;
         font-size: 13px;
+        font-weight: 400;
         line-height: 1.5;
-        letter-spacing: 0.16em;
+        letter-spacing: 0.18em;
         text-transform: uppercase;
       }
 
       h2 {
-        margin: 0 0 18px;
-        font-size: 30px;
+        max-width: 820px;
+        margin: 0 0 20px;
+        font-size: 36px;
         font-weight: 400;
-        line-height: 1.15;
+        line-height: 1.12;
+        letter-spacing: 0.02em;
+      }
+
+      .project-title {
+        margin: 0 0 18px;
+        font-size: 24px;
+        font-weight: 400;
+        line-height: 1.3;
         letter-spacing: 0.04em;
       }
 
-      p {
-        max-width: 720px;
+      .body {
+        max-width: 760px;
         margin: 0;
-        color: #555;
-        font-size: 13px;
-        font-weight: 300;
+        color: #555555;
+        font-size: 15px;
+        font-weight: 400;
         line-height: 1.75;
       }
 
-      .manrope {
-        font-family: "Manrope", "Noto Sans SC", sans-serif;
+      .cn {
+        margin-top: 12px;
+        font-family: "Noto Sans SC", sans-serif;
+        font-size: 13px;
+        line-height: 1.8;
+        letter-spacing: 0;
       }
 
-      .plex {
-        font-family: "IBM Plex Sans", "Noto Sans SC", sans-serif;
+      .bodoni-moda {
+        font-family: "Bodoni Moda", "Noto Sans SC", serif;
       }
 
-      .source {
-        font-family: "Source Sans 3", "Noto Sans SC", sans-serif;
+      .libre-bodoni {
+        font-family: "Libre Bodoni", "Noto Sans SC", serif;
       }
 
-      .work {
-        font-family: "Work Sans", "Noto Sans SC", sans-serif;
+      .playfair {
+        font-family: "Playfair Display", "Noto Sans SC", serif;
       }
 
-      .lato {
-        font-family: "Lato", "Noto Sans SC", sans-serif;
+      .prata {
+        font-family: "Prata", "Noto Sans SC", serif;
       }
 
-      .jost {
-        font-family: "Jost", "Noto Sans SC", sans-serif;
-      }
+      @media (max-width: 720px) {
+        main {
+          width: min(100% - 32px, 1220px);
+          padding-top: 32px;
+        }
 
-      .sora {
-        font-family: "Sora", "Noto Sans SC", sans-serif;
-      }
+        .sample {
+          grid-template-columns: 1fr;
+          gap: 18px;
+        }
 
-      .instrument {
-        font-family: "Instrument Sans", "Noto Sans SC", sans-serif;
-      }
-
-      .jakarta {
-        font-family: "Plus Jakarta Sans", "Noto Sans SC", sans-serif;
-      }
-
-      .dm {
-        font-family: "DM Sans", "Noto Sans SC", sans-serif;
-      }
-
-      .barlow {
-        font-family: "Barlow", "Noto Sans SC", sans-serif;
-      }
-
-      .urbanist {
-        font-family: "Urbanist", "Noto Sans SC", sans-serif;
-      }
-
-      .raleway {
-        font-family: "Raleway", "Noto Sans SC", sans-serif;
-      }
-
-      .hanken {
-        font-family: "Hanken Grotesk", "Noto Sans SC", sans-serif;
+        h2 {
+          font-size: 28px;
+        }
       }
     </style>
   </head>
   <body>
     <main>
-      <h1 class="sheet-title">MIN Studio Font Preview</h1>
+      <h1 class="sheet-title">MIN Studio Didone Serif Font Preview</h1>
 
-      <section class="sample manrope">
-        <p class="name">01 / Manrope + Noto Sans SC</p>
+      <section class="sample bodoni-moda">
+        <p class="name">01 / Bodoni Moda + Noto Sans SC<span class="note">最接近参考图：高对比、杂志封面感强，适合 Logo 与大标题。</span></p>
         <div>
-          <p class="logo">Min Studio</p>
-          <p class="logo alt">MIN STUDIO</p>
+          <p class="logo">MIN STUDIO</p>
           <p class="menu">Projects&nbsp;&nbsp;&nbsp;Products&nbsp;&nbsp;&nbsp;Styling&nbsp;&nbsp;&nbsp;Studio&nbsp;&nbsp;&nbsp;Contact</p>
-          <h2>M — Modern<br />现代不是风格，而是一种对当下生活的理解。</h2>
-          <p>Modern is not a style, but an understanding of contemporary life. Design should respond to the way people truly live today — their habits, needs, and emotions.</p>
+          <h2>M — Modern is not a style, but an understanding of contemporary life.</h2>
+          <p class="project-title">The Unbound Collection by Hyatt</p>
+          <p class="body">Design should respond to the way people truly live today — their habits, needs, and emotions. We value clarity, restraint, and purpose.</p>
+          <p class="body cn">现代不是风格，而是一种对当下生活的理解。设计应回应当代人的生活方式与真实需求。</p>
         </div>
       </section>
 
-      <section class="sample plex">
-        <p class="name">02 / IBM Plex Sans + Noto Sans SC</p>
+      <section class="sample libre-bodoni">
+        <p class="name">02 / Libre Bodoni + Noto Sans SC<span class="note">同样接近 Bodoni 气质，比 Bodoni Moda 稍稳一些。</span></p>
         <div>
-          <p class="logo">Min Studio</p>
-          <p class="logo alt">MIN STUDIO</p>
+          <p class="logo">MIN STUDIO</p>
           <p class="menu">Projects&nbsp;&nbsp;&nbsp;Products&nbsp;&nbsp;&nbsp;Styling&nbsp;&nbsp;&nbsp;Studio&nbsp;&nbsp;&nbsp;Contact</p>
-          <h2>M — Modern<br />现代不是风格，而是一种对当下生活的理解。</h2>
-          <p>Modern is not a style, but an understanding of contemporary life. Design should respond to the way people truly live today — their habits, needs, and emotions.</p>
+          <h2>M — Modern is not a style, but an understanding of contemporary life.</h2>
+          <p class="project-title">The Unbound Collection by Hyatt</p>
+          <p class="body">Design should respond to the way people truly live today — their habits, needs, and emotions. We value clarity, restraint, and purpose.</p>
+          <p class="body cn">现代不是风格，而是一种对当下生活的理解。设计应回应当代人的生活方式与真实需求。</p>
         </div>
       </section>
 
-      <section class="sample source">
-        <p class="name">03 / Source Sans 3 + Noto Sans SC</p>
+      <section class="sample playfair">
+        <p class="name">03 / Playfair Display + Noto Sans SC<span class="note">更柔和，网页可读性更好，适合整体英文替换。</span></p>
         <div>
-          <p class="logo">Min Studio</p>
-          <p class="logo alt">MIN STUDIO</p>
+          <p class="logo">MIN STUDIO</p>
           <p class="menu">Projects&nbsp;&nbsp;&nbsp;Products&nbsp;&nbsp;&nbsp;Styling&nbsp;&nbsp;&nbsp;Studio&nbsp;&nbsp;&nbsp;Contact</p>
-          <h2>M — Modern<br />现代不是风格，而是一种对当下生活的理解。</h2>
-          <p>Modern is not a style, but an understanding of contemporary life. Design should respond to the way people truly live today — their habits, needs, and emotions.</p>
+          <h2>M — Modern is not a style, but an understanding of contemporary life.</h2>
+          <p class="project-title">The Unbound Collection by Hyatt</p>
+          <p class="body">Design should respond to the way people truly live today — their habits, needs, and emotions. We value clarity, restraint, and purpose.</p>
+          <p class="body cn">现代不是风格，而是一种对当下生活的理解。设计应回应当代人的生活方式与真实需求。</p>
         </div>
       </section>
 
-      <section class="sample work">
-        <p class="name">04 / Work Sans + Noto Sans SC</p>
+      <section class="sample prata">
+        <p class="name">04 / Prata + Noto Sans SC<span class="note">安静、克制、精致，适合极简空间设计网站。</span></p>
         <div>
-          <p class="logo">Min Studio</p>
-          <p class="logo alt">MIN STUDIO</p>
+          <p class="logo">MIN STUDIO</p>
           <p class="menu">Projects&nbsp;&nbsp;&nbsp;Products&nbsp;&nbsp;&nbsp;Styling&nbsp;&nbsp;&nbsp;Studio&nbsp;&nbsp;&nbsp;Contact</p>
-          <h2>M — Modern<br />现代不是风格，而是一种对当下生活的理解。</h2>
-          <p>Modern is not a style, but an understanding of contemporary life. Design should respond to the way people truly live today — their habits, needs, and emotions.</p>
-        </div>
-      </section>
-
-      <section class="sample lato">
-        <p class="name">05 / Lato + Noto Sans SC</p>
-        <div>
-          <p class="logo">Min Studio</p>
-          <p class="logo alt">MIN STUDIO</p>
-          <p class="menu">Projects&nbsp;&nbsp;&nbsp;Products&nbsp;&nbsp;&nbsp;Styling&nbsp;&nbsp;&nbsp;Studio&nbsp;&nbsp;&nbsp;Contact</p>
-          <h2>M — Modern<br />现代不是风格，而是一种对当下生活的理解。</h2>
-          <p>Modern is not a style, but an understanding of contemporary life. Design should respond to the way people truly live today — their habits, needs, and emotions.</p>
-        </div>
-      </section>
-
-      <section class="sample jost">
-        <p class="name">06 / Jost + Noto Sans SC</p>
-        <div>
-          <p class="logo">Min Studio</p>
-          <p class="logo alt">MIN STUDIO</p>
-          <p class="menu">Projects&nbsp;&nbsp;&nbsp;Products&nbsp;&nbsp;&nbsp;Styling&nbsp;&nbsp;&nbsp;Studio&nbsp;&nbsp;&nbsp;Contact</p>
-          <h2>M — Modern<br />现代不是风格，而是一种对当下生活的理解。</h2>
-          <p>Modern is not a style, but an understanding of contemporary life. Design should respond to the way people truly live today — their habits, needs, and emotions.</p>
-        </div>
-      </section>
-
-      <section class="sample sora">
-        <p class="name">07 / Sora + Noto Sans SC</p>
-        <div>
-          <p class="logo">Min Studio</p>
-          <p class="logo alt">MIN STUDIO</p>
-          <p class="menu">Projects&nbsp;&nbsp;&nbsp;Products&nbsp;&nbsp;&nbsp;Styling&nbsp;&nbsp;&nbsp;Studio&nbsp;&nbsp;&nbsp;Contact</p>
-          <h2>M — Modern<br />现代不是风格，而是一种对当下生活的理解。</h2>
-          <p>Modern is not a style, but an understanding of contemporary life. Design should respond to the way people truly live today — their habits, needs, and emotions.</p>
-        </div>
-      </section>
-
-      <section class="sample instrument">
-        <p class="name">08 / Instrument Sans + Noto Sans SC</p>
-        <div>
-          <p class="logo">Min Studio</p>
-          <p class="logo alt">MIN STUDIO</p>
-          <p class="menu">Projects&nbsp;&nbsp;&nbsp;Products&nbsp;&nbsp;&nbsp;Styling&nbsp;&nbsp;&nbsp;Studio&nbsp;&nbsp;&nbsp;Contact</p>
-          <h2>M — Modern<br />现代不是风格，而是一种对当下生活的理解。</h2>
-          <p>Modern is not a style, but an understanding of contemporary life. Design should respond to the way people truly live today — their habits, needs, and emotions.</p>
-        </div>
-      </section>
-
-      <section class="sample jakarta">
-        <p class="name">09 / Plus Jakarta Sans + Noto Sans SC</p>
-        <div>
-          <p class="logo">Min Studio</p>
-          <p class="logo alt">MIN STUDIO</p>
-          <p class="menu">Projects&nbsp;&nbsp;&nbsp;Products&nbsp;&nbsp;&nbsp;Styling&nbsp;&nbsp;&nbsp;Studio&nbsp;&nbsp;&nbsp;Contact</p>
-          <h2>M — Modern<br />现代不是风格，而是一种对当下生活的理解。</h2>
-          <p>Modern is not a style, but an understanding of contemporary life. Design should respond to the way people truly live today — their habits, needs, and emotions.</p>
-        </div>
-      </section>
-
-      <section class="sample dm">
-        <p class="name">10 / DM Sans + Noto Sans SC</p>
-        <div>
-          <p class="logo">Min Studio</p>
-          <p class="logo alt">MIN STUDIO</p>
-          <p class="menu">Projects&nbsp;&nbsp;&nbsp;Products&nbsp;&nbsp;&nbsp;Styling&nbsp;&nbsp;&nbsp;Studio&nbsp;&nbsp;&nbsp;Contact</p>
-          <h2>M — Modern<br />现代不是风格，而是一种对当下生活的理解。</h2>
-          <p>Modern is not a style, but an understanding of contemporary life. Design should respond to the way people truly live today — their habits, needs, and emotions.</p>
-        </div>
-      </section>
-
-      <section class="sample barlow">
-        <p class="name">11 / Barlow + Noto Sans SC</p>
-        <div>
-          <p class="logo">Min Studio</p>
-          <p class="logo alt">MIN STUDIO</p>
-          <p class="menu">Projects&nbsp;&nbsp;&nbsp;Products&nbsp;&nbsp;&nbsp;Styling&nbsp;&nbsp;&nbsp;Studio&nbsp;&nbsp;&nbsp;Contact</p>
-          <h2>M — Modern<br />现代不是风格，而是一种对当下生活的理解。</h2>
-          <p>Modern is not a style, but an understanding of contemporary life. Design should respond to the way people truly live today — their habits, needs, and emotions.</p>
-        </div>
-      </section>
-
-      <section class="sample urbanist">
-        <p class="name">12 / Urbanist + Noto Sans SC</p>
-        <div>
-          <p class="logo">Min Studio</p>
-          <p class="logo alt">MIN STUDIO</p>
-          <p class="menu">Projects&nbsp;&nbsp;&nbsp;Products&nbsp;&nbsp;&nbsp;Styling&nbsp;&nbsp;&nbsp;Studio&nbsp;&nbsp;&nbsp;Contact</p>
-          <h2>M — Modern<br />现代不是风格，而是一种对当下生活的理解。</h2>
-          <p>Modern is not a style, but an understanding of contemporary life. Design should respond to the way people truly live today — their habits, needs, and emotions.</p>
-        </div>
-      </section>
-
-      <section class="sample raleway">
-        <p class="name">13 / Raleway + Noto Sans SC</p>
-        <div>
-          <p class="logo">Min Studio</p>
-          <p class="logo alt">MIN STUDIO</p>
-          <p class="menu">Projects&nbsp;&nbsp;&nbsp;Products&nbsp;&nbsp;&nbsp;Styling&nbsp;&nbsp;&nbsp;Studio&nbsp;&nbsp;&nbsp;Contact</p>
-          <h2>M — Modern<br />现代不是风格，而是一种对当下生活的理解。</h2>
-          <p>Modern is not a style, but an understanding of contemporary life. Design should respond to the way people truly live today — their habits, needs, and emotions.</p>
-        </div>
-      </section>
-
-      <section class="sample hanken">
-        <p class="name">14 / Hanken Grotesk + Noto Sans SC</p>
-        <div>
-          <p class="logo">Min Studio</p>
-          <p class="logo alt">MIN STUDIO</p>
-          <p class="menu">Projects&nbsp;&nbsp;&nbsp;Products&nbsp;&nbsp;&nbsp;Styling&nbsp;&nbsp;&nbsp;Studio&nbsp;&nbsp;&nbsp;Contact</p>
-          <h2>M — Modern<br />现代不是风格，而是一种对当下生活的理解。</h2>
-          <p>Modern is not a style, but an understanding of contemporary life. Design should respond to the way people truly live today — their habits, needs, and emotions.</p>
+          <h2>M — Modern is not a style, but an understanding of contemporary life.</h2>
+          <p class="project-title">The Unbound Collection by Hyatt</p>
+          <p class="body">Design should respond to the way people truly live today — their habits, needs, and emotions. We value clarity, restraint, and purpose.</p>
+          <p class="body cn">现代不是风格，而是一种对当下生活的理解。设计应回应当代人的生活方式与真实需求。</p>
         </div>
       </section>
     </main>
