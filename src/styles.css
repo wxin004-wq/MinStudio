@@ -646,7 +646,14 @@ main {
   pointer-events: none;
 }
 
-.project-copy h3,
+.project-copy h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.7;
+  letter-spacing: 0.07em;
+}
+
 .product-card h3 {
   margin: 0;
   font-size: 14px;
