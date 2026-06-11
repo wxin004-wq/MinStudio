@@ -795,10 +795,14 @@ main {
 .project-detail-header h2 {
   font-family: var(--font-display-en), var(--font-sans-cn), serif;
   margin: 0;
-  font-size: clamp(18px, 2.1vw, 32px);
+  font-size: clamp(16px, 1.7vw, 26px);
   font-weight: 400;
   line-height: 1.12;
   letter-spacing: 0;
+}
+
+[lang="zh-CN"] .project-detail-header h2 {
+  font-family: var(--font-sans-cn), sans-serif;
 }
 
 .project-detail-meta {
@@ -1386,7 +1390,7 @@ p.company-address-en {
   }
 
   .project-detail-header h2 {
-    font-size: clamp(18px, 7vw, 26px);
+    font-size: clamp(16px, 5.8vw, 22px);
     line-height: 1.16;
   }
 
