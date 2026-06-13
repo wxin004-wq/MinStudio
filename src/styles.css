@@ -436,22 +436,179 @@ main {
 }
 
 .studio-section {
-  min-height: calc(100svh - 92px);
-  display: grid;
-  align-items: center;
+  padding-top: clamp(96px, 12vw, 160px);
 }
 
-.studio-copy {
-  width: min(620px, 100%);
+.studio-page {
+  width: min(1120px, 100%);
   margin: 0 auto;
+  color: #241f1a;
 }
 
-.studio-section .home-philosophy-list article p {
-  color: #555555;
+.studio-hero {
+  min-height: 64svh;
+  display: grid;
+  align-content: center;
+  padding-bottom: clamp(64px, 9vw, 120px);
 }
 
-.studio-section .home-philosophy-closing p {
-  color: #242424;
+.studio-eyebrow,
+.studio-label,
+.studio-kicker {
+  margin: 0;
+  font-family: var(--font-body-en), var(--font-sans-cn), serif;
+  font-size: 10px;
+  font-weight: 300;
+  line-height: 1.8;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #8d806f;
+}
+
+[lang="zh-CN"] .studio-eyebrow,
+[lang="zh-CN"] .studio-label,
+[lang="zh-CN"] .studio-kicker {
+  font-family: var(--font-sans-cn), sans-serif;
+  letter-spacing: 0.1em;
+}
+
+.studio-hero h1,
+.studio-block h2 {
+  margin: 0;
+  font-family: var(--font-display-en), var(--font-sans-cn), serif;
+  font-weight: 300;
+  line-height: 1.02;
+  letter-spacing: 0;
+}
+
+[lang="zh-CN"] .studio-hero h1,
+[lang="zh-CN"] .studio-block h2,
+[lang="zh-CN"] .studio-manifesto h3,
+[lang="zh-CN"] .studio-process-steps h3 {
+  font-family: var(--font-sans-cn), sans-serif;
+}
+
+.studio-hero h1 {
+  margin-top: 28px;
+  font-size: clamp(48px, 9vw, 118px);
+}
+
+.studio-hero h1 span,
+.studio-hero h1 em,
+.studio-block h2 span,
+.studio-block h2 em {
+  display: block;
+}
+
+.studio-hero h1 em,
+.studio-block h2 em {
+  font-style: italic;
+  color: #9b765f;
+}
+
+.studio-hero > p:last-child {
+  width: min(520px, 100%);
+  margin: 32px 0 0;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.9;
+  color: #6d6258;
+}
+
+.studio-block {
+  padding: clamp(72px, 10vw, 128px) 0;
+  border-top: 1px solid #e6e0d8;
+}
+
+.studio-block h2 {
+  margin-top: 26px;
+  font-size: clamp(30px, 4vw, 54px);
+  line-height: 1.18;
+}
+
+.studio-manifesto {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 42px 72px;
+  margin-top: 58px;
+}
+
+.studio-manifesto h3,
+.studio-process-steps h3 {
+  margin: 0 0 10px;
+  font-family: var(--font-body-en), var(--font-sans-cn), serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.45;
+  color: #9b765f;
+}
+
+.studio-manifesto p,
+.studio-story-copy p,
+.studio-process-intro p,
+.studio-process-steps p {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.9;
+  color: #5b554f;
+}
+
+[lang="zh-CN"] .studio-manifesto p,
+[lang="zh-CN"] .studio-story-copy p,
+[lang="zh-CN"] .studio-process-intro p,
+[lang="zh-CN"] .studio-process-steps p {
+  font-family: var(--font-sans-cn), sans-serif;
+}
+
+.studio-story-grid,
+.studio-process-intro {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(42px, 8vw, 112px);
+  align-items: start;
+  margin-top: 30px;
+}
+
+.studio-story-copy {
+  display: grid;
+  gap: 24px;
+}
+
+.studio-pull {
+  font-family: var(--font-display-en), var(--font-sans-cn), serif;
+  font-size: 22px !important;
+  line-height: 1.45 !important;
+  color: #2f2821 !important;
+}
+
+[lang="zh-CN"] .studio-pull {
+  font-family: var(--font-sans-cn), sans-serif;
+}
+
+.studio-kicker {
+  margin-top: 28px;
+}
+
+.studio-process-steps {
+  display: grid;
+  margin-top: 56px;
+  border-top: 1px solid #e6e0d8;
+}
+
+.studio-process-steps article {
+  display: grid;
+  grid-template-columns: 54px minmax(120px, 0.32fr) minmax(0, 1fr);
+  gap: 24px;
+  padding: 22px 0;
+  border-bottom: 1px solid #e6e0d8;
+  align-items: start;
+}
+
+.studio-process-steps span {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: #9b765f;
 }
 
 @media (max-width: 1080px) {
@@ -821,8 +978,7 @@ main {
 }
 
 .project-detail-meta div {
-  border-top: 1px solid #e7e7e7;
-  padding-top: 12px;
+  padding-top: 0;
 }
 
 .project-detail-meta dt,
@@ -1427,6 +1583,65 @@ p.company-address-en {
   .project-thumbnails button {
     flex-basis: 44px;
     height: 34px;
+  }
+
+  .studio-section {
+    padding-top: 84px;
+  }
+
+  .studio-hero {
+    min-height: auto;
+    padding: 48px 0 72px;
+  }
+
+  .studio-hero h1 {
+    margin-top: 22px;
+    font-size: clamp(38px, 14vw, 58px);
+    line-height: 1.08;
+  }
+
+  .studio-hero > p:last-child {
+    margin-top: 26px;
+    font-size: 12px;
+    line-height: 1.85;
+  }
+
+  .studio-block {
+    padding: 58px 0;
+  }
+
+  .studio-block h2 {
+    margin-top: 20px;
+    font-size: clamp(24px, 8vw, 36px);
+    line-height: 1.24;
+  }
+
+  .studio-manifesto,
+  .studio-story-grid,
+  .studio-process-intro {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .studio-manifesto {
+    margin-top: 38px;
+  }
+
+  .studio-process-steps {
+    margin-top: 38px;
+  }
+
+  .studio-process-steps article {
+    grid-template-columns: 42px minmax(0, 1fr);
+    gap: 12px 18px;
+  }
+
+  .studio-process-steps article p {
+    grid-column: 2;
+  }
+
+  .studio-pull {
+    font-size: 18px !important;
   }
 
   .fullscreen-viewer {
