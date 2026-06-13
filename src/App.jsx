@@ -100,43 +100,6 @@ const copy = {
       { title: 'Seasonal Room', location: 'Suzhou, China', category: 'Residential Styling' },
       { title: 'Still Life', location: 'Shanghai, China', category: 'Object Styling' },
     ],
-    studio: {
-      heroEyebrow: 'Architecture & Interior Design',
-      heroTitle: ['We design the', 'experience of', 'space.'],
-      heroText: 'Through atmosphere, light, nature, and ritual, we create places that support connection and solitude, energy and stillness.',
-      philosophyLabel: 'Studio Philosophy',
-      philosophyTitle: [
-        'We are not interested in creating',
-        'spaces that impress for a moment.',
-        'We aspire to create places that',
-        'reveal themselves over time.',
-      ],
-      manifesto: [
-        ['On Novelty', 'Min Studio does not pursue novelty for its own sake. We believe meaningful spaces emerge through observation, refinement, and time.'],
-        ['On Guiding Values', 'Our work is guided by patience rather than urgency, atmosphere rather than spectacle, and presence rather than decoration.'],
-        ['On Frameworks', 'We design frameworks that allow light, material, nature, and human life to interact naturally.'],
-        ['On Completion', 'A project is not complete when construction ends. It continues to evolve through occupation, memory, weather, and use.'],
-      ],
-      storyLabel: 'Studio Story',
-      storyTitle: ['Where', 'Min Studio', 'began.'],
-      storyKicker: 'Architecture & Interior Design',
-      story: [
-        'Min Studio was founded on a simple but persistent question: why do some spaces make us feel fully alive, while others leave us hollow? The answer, we came to believe, is never in the objects. It is always in the atmosphere — the quality of light at a particular hour, the temperature of a material under your hand, the way a room holds sound.',
-        'We are not decorators of walls. We are architects of feeling.',
-        'Our practice grew from a conviction that design should begin with deep listening — to the land, to the light, to the people who will live or work or rest within what we make.',
-        'Today, Min Studio works across architecture, interior design, and hospitality — drawn to projects where the experience of space is as important as its construction.',
-      ],
-      processLabel: 'Our Process',
-      processTitle: ['How we move from', 'feeling to form.'],
-      processIntro: 'Every Min Studio project follows a five-phase process rooted in curiosity, restraint, and care. We do not rush from brief to blueprint. We take the time to understand deeply before we begin to propose.',
-      process: [
-        ['01', 'Listen', 'We begin in silence. Visiting the site, studying the light, understanding the culture and the people.'],
-        ['02', 'Feel', 'Before we speak in form, we define the emotional register. What should this space feel like?'],
-        ['03', 'Distil', 'We resist the impulse to add, finding the essential idea and protecting it against noise.'],
-        ['04', 'Make', 'Design develops through dialogue between client, team, material, and site.'],
-        ['05', 'Inhabit', 'We consider our work complete only when the space has been lived in, revisited, refined, and cared for.'],
-      ],
-    },
     contact: 'Contact',
   },
   cn: {
@@ -214,43 +177,6 @@ const copy = {
       { title: '季节房间', location: '中国 苏州', category: '住宅陈设' },
       { title: '静物', location: '中国 上海', category: '器物陈设' },
     ],
-    studio: {
-      heroEyebrow: '建筑与室内设计',
-      heroTitle: ['我们设计的', '不仅是空间，', '而是体验。'],
-      heroText: '通过氛围、光线、自然与日常仪式，我们创造能够承载连接、独处、能量与安静的场所。',
-      philosophyLabel: '工作室理念',
-      philosophyTitle: [
-        '我们并不追求',
-        '只在瞬间令人惊艳的空间。',
-        '我们希望创造',
-        '会随着时间展开的场所。',
-      ],
-      manifesto: [
-        ['关于新意', 'Min Studio 不追求为新而新的形式。我们相信，有意义的空间来自观察、推敲与时间。'],
-        ['关于价值', '我们的工作由耐心而非急切、氛围而非奇观、存在感而非装饰性所引导。'],
-        ['关于框架', '我们设计的是一种框架，使光线、材料、自然与人的生活能够自然互动。'],
-        ['关于完成', '项目并不在施工结束时完成。它会在使用、记忆、气候与时间中继续生长。'],
-      ],
-      storyLabel: '工作室故事',
-      storyTitle: ['Min Studio', '从何处', '开始。'],
-      storyKicker: '建筑与室内设计',
-      story: [
-        'Min Studio 源于一个简单而持续的问题：为什么有些空间让人感到真正鲜活，而另一些空间却让人空洞？我们相信答案从不只在物件之中，而在氛围之中。',
-        '我们不是墙面的装饰者。我们是感受的建造者。',
-        '我们的实践始于深入聆听：聆听土地、光线，以及将在空间中生活、工作或停留的人。',
-        '今天，Min Studio 的工作横跨建筑、室内与酒店空间。我们有意保持小规模，只承接有限项目，以给予每一个项目充分的注意力。',
-      ],
-      processLabel: '工作方法',
-      processTitle: ['我们如何从', '感受走向形式。'],
-      processIntro: '每一个 Min Studio 项目都遵循五个阶段：好奇、克制与关照。我们不会急于从任务书走向图纸，而是先花时间真正理解。',
-      process: [
-        ['01', '聆听', '我们从安静开始。走访现场，观察光线，理解文化与使用者。'],
-        ['02', '感受', '在形式出现之前，我们先定义空间应有的情绪与氛围。'],
-        ['03', '提炼', '我们克制添加的冲动，寻找最核心的概念，并保护它不被噪音淹没。'],
-        ['04', '生成', '设计在客户、团队、材料与场地之间的对话中逐步发展。'],
-        ['05', '使用', '只有当空间被真实使用、回访、修正并持续照看时，工作才真正完整。'],
-      ],
-    },
     contact: '联系',
   },
 };
@@ -613,13 +539,16 @@ function ProjectDetail({ slug, lang }) {
         </div>
         <div className="project-detail-header">
           <div>
+            <p className="project-detail-label">{t.project.label}</p>
             <h2 id="project-title">{projectTitle}</h2>
           </div>
           <dl className="project-detail-meta">
             <div>
+              <dt>{t.project.location}</dt>
               <dd>{localized(project.location, lang)}</dd>
             </div>
             <div>
+              <dt>{t.project.category}</dt>
               <dd>{t.categories[project.category]}</dd>
             </div>
           </dl>
@@ -693,75 +622,27 @@ function HomeLanding({ lang }) {
 }
 
 function Studio({ lang }) {
-  const t = copy[lang].studio;
+  const t = copy[lang].home;
 
   return (
     <section className="page-section studio-section" id="studio" aria-label={copy[lang].nav.studio}>
-      <div className="studio-page">
-        <div className="studio-hero">
-          <p className="studio-eyebrow">{t.heroEyebrow}</p>
-          <h1>
-            {t.heroTitle.slice(0, 2).map((line) => (
-              <span key={line}>{line}</span>
-            ))}
-            <em>{t.heroTitle[2]}</em>
-          </h1>
-          <p>{t.heroText}</p>
-        </div>
-
-        <div className="studio-block studio-philosophy">
-          <p className="studio-label">{t.philosophyLabel}</p>
-          <h2>
-            {t.philosophyTitle.slice(0, 3).map((line) => (
-              <span key={line}>{line}</span>
-            ))}
-            <em>{t.philosophyTitle[3]}</em>
-          </h2>
-          <div className="studio-manifesto">
-            {t.manifesto.map(([title, body]) => (
-              <article key={title}>
-                <h3>{title}</h3>
-                <p>{body}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-
-        <div className="studio-block studio-story">
-          <p className="studio-label">{t.storyLabel}</p>
-          <div className="studio-story-grid">
-            <div>
-              <h2>
-                {t.storyTitle.map((line, index) => (
-                  index === t.storyTitle.length - 1 ? <em key={line}>{line}</em> : <span key={line}>{line}</span>
-                ))}
-              </h2>
-              <p className="studio-kicker">{t.storyKicker}</p>
-            </div>
-            <div className="studio-story-copy">
-              {t.story.map((paragraph, index) => (
-                <p key={paragraph} className={index === 1 ? 'studio-pull' : ''}>{paragraph}</p>
+      <div className="studio-copy">
+        <div className="home-philosophy-list">
+          {t.principles.map(([title, paragraphs]) => (
+            <article key={title}>
+              <h3>{title}</h3>
+              {paragraphs.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
               ))}
-            </div>
-          </div>
-        </div>
-
-        <div className="studio-block studio-process">
-          <p className="studio-label">{t.processLabel}</p>
-          <div className="studio-process-intro">
-            <h2>
-              <span>{t.processTitle[0]}</span>
-              <em>{t.processTitle[1]}</em>
-            </h2>
-            <p>{t.processIntro}</p>
-          </div>
-          <div className="studio-process-steps">
-            {t.process.map(([number, title, body]) => (
-              <article key={number}>
-                <span>{number}</span>
-                <h3>{title}</h3>
-                <p>{body}</p>
-              </article>
+            </article>
+          ))}
+          <div className="home-philosophy-closing">
+            {t.closing.map((group) => (
+              <p key={group.join(' ')}>
+                {group.map((line) => (
+                  <span key={line}>{line} </span>
+                ))}
+              </p>
             ))}
           </div>
         </div>
