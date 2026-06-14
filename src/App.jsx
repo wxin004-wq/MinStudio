@@ -1,22 +1,23 @@
 import { useState, useEffect } from 'react';
 
 const rawProjects = [
-  ['hyatt-place-yuhang-china', ['Hyatt Place', '余杭凯悦嘉轩酒店'], ['Yuhang, China', '中国 余杭'], 'hotels'],
-  ['boutique-hotel-jingdezhen-china', ['Boutique Hotel', '景德镇精品酒店'], ['Jingdezhen, China', '中国 景德镇'], 'hotels'],
-  ['the-pujun-hotel-guangzhou-china', ['The Pujun Hotel', '广州璞隽酒店'], ['Guangzhou, China', '中国 广州'], 'hotels'],
-  ['the-pujun-hotel-shanghai-china', ['The Pujun Hotel', '上海璞隽酒店'], ['Shanghai, China', '中国 上海'], 'hotels'],
-  ['the-unbound-collection-by-hyatt-yixing-china', ['The Unbound Collection by Hyatt', '宜兴凯悦臻选酒店'], ['Yixing, China', '中国 宜兴'], 'hotels'],
-  ['hyatt-regency-hangzhou-bay-cixi-china', ['Hyatt Regency Hangzhou Bay', '杭州湾凯悦酒店'], ['Cixi, China', '中国 慈溪'], 'hotels'],
-  ['hyatt-place-jingdezhen-china', ['Hyatt Place', '景德镇凯悦嘉轩酒店'], ['Jingdezhen, China', '中国 景德镇'], 'hotels'],
-  ['hyatt-place-shaoxing-china', ['Hyatt Place', '绍兴凯悦嘉轩酒店'], ['Shaoxing, China', '中国 绍兴'], 'hotels'],
-  ['parkfleet-hotel-shanghai-china', ['Boutique Hotel', '上海奉贤精品酒店'], ['Shanghai, China', '中国 上海'], 'hotels'],
-  ['h2-architecture-office-shanghai-china', ['H2 Architecture Office', '赫图建筑办公室'], ['Shanghai, China', '中国 上海'], 'residential'],
-  ['guishan-villa-shenzhen-china', ['Guishan Villa', '深圳龟山别墅'], ['Shenzhen, China', '中国 深圳'], 'residential'],
-  ['artists-villa-yixing-china', ['Artist’s Villa', '宜兴艺术家别墅'], ['Yixing, China', '中国 宜兴'], 'residential'],
-  ['private-residence-of-yada-yixing-china', ['Private Residence of Yada', '宜兴雅达私宅'], ['Yixing, China', '中国 宜兴'], 'residential'],
-].map(([slug, title, location, category]) => ({
+  ['hyatt-place-yuhang-china', ['Hyatt Place', '余杭凯悦嘉轩酒店'], ['Yuhang, China', '中国 余杭'], 'hotels', '04'],
+  ['boutique-hotel-jingdezhen-china', ['Boutique Hotel', '景德镇精品酒店'], ['Jingdezhen, China', '中国 景德镇'], 'hotels', '01'],
+  ['the-pujun-hotel-guangzhou-china', ['The Pujun Hotel', '广州璞隽酒店'], ['Guangzhou, China', '中国 广州'], 'hotels', '02'],
+  ['the-pujun-hotel-shanghai-china', ['The Pujun Hotel', '上海璞隽酒店'], ['Shanghai, China', '中国 上海'], 'hotels', '05'],
+  ['the-unbound-collection-by-hyatt-yixing-china', ['The Unbound Collection by Hyatt', '宜兴凯悦臻选酒店'], ['Yixing, China', '中国 宜兴'], 'hotels', '03'],
+  ['hyatt-regency-hangzhou-bay-cixi-china', ['Hyatt Regency Hangzhou Bay', '杭州湾凯悦酒店'], ['Cixi, China', '中国 慈溪'], 'hotels', '01'],
+  ['hyatt-place-jingdezhen-china', ['Hyatt Place', '景德镇凯悦嘉轩酒店'], ['Jingdezhen, China', '中国 景德镇'], 'hotels', '05'],
+  ['hyatt-place-shaoxing-china', ['Hyatt Place', '绍兴凯悦嘉轩酒店'], ['Shaoxing, China', '中国 绍兴'], 'hotels', '05'],
+  ['parkfleet-hotel-shanghai-china', ['Boutique Hotel', '上海奉贤精品酒店'], ['Shanghai, China', '中国 上海'], 'hotels', '14'],
+  ['h2-architecture-office-shanghai-china', ['H2 Architecture Office', '赫图建筑办公室'], ['Shanghai, China', '中国 上海'], 'residential', '04'],
+  ['guishan-villa-shenzhen-china', ['Guishan Villa', '深圳龟山别墅'], ['Shenzhen, China', '中国 深圳'], 'residential', '05'],
+  ['artists-villa-yixing-china', ['Artist’s Villa', '宜兴艺术家别墅'], ['Yixing, China', '中国 宜兴'], 'residential', '03'],
+  ['private-residence-of-yada-yixing-china', ['Private Residence of Yada', '宜兴雅达私宅'], ['Yixing, China', '中国 宜兴'], 'residential', '03'],
+].map(([slug, title, location, category, coverImage = '01']) => ({
   slug,
   imageFolder: slug,
+  coverImage,
   title,
   location: { en: location[0], cn: location[1] },
   category,
@@ -196,20 +197,14 @@ const mobileHomeSlideModules = import.meta.glob('./assets/home-mobile-web/*.{jpg
   query: '?url',
   import: 'default',
 });
-const projectCoverModules = import.meta.glob('./assets/projects/*/01.{jpg,jpeg,png,webp}', {
+const projectAssetModules = import.meta.glob('./assets/projects/*/*.{jpg,jpeg,png,webp}', {
   eager: true,
-  query: '?url',
-  import: 'default',
-});
-const projectImageLoaders = import.meta.glob([
-  './assets/projects/*/*.{jpg,jpeg,png,webp}',
-  '!./assets/projects/*/01.{jpg,jpeg,png,webp}',
-], {
   query: '?url',
   import: 'default',
 });
 
 const getProjectFolder = (path) => path.replace(/\\/g, '/').match(/assets\/projects\/([^/]+)\//)?.[1] || '';
+const getImageFilename = (path) => path.replace(/\\/g, '/').split('/').pop() || '';
 const getImageIndex = (path) => {
   const match = path.match(/\/(\d+)\.[a-z]+$/i);
   return match ? Number(match[1]) : 0;
@@ -219,25 +214,31 @@ const comingSoonProjectSlugs = new Set([
   'the-pujun-hotel-guangzhou-china',
 ]);
 
-const projectCovers = Object.entries(projectCoverModules).reduce((covers, [path, url]) => {
-  covers[getProjectFolder(path)] = url;
-  return covers;
+const projectAssets = Object.entries(projectAssetModules).reduce((assets, [path, url]) => {
+  const folder = getProjectFolder(path);
+  const filename = getImageFilename(path);
+  assets[folder] = { ...assets[folder], [filename]: url };
+  return assets;
 }, {});
 
 const loadProjectImages = async (project) => {
   if (project.isComingSoon) return [project.cover].filter(Boolean);
 
-  const entries = Object.entries(projectImageLoaders)
-    .filter(([path]) => getProjectFolder(path) === project.imageFolder)
-    .sort(([a], [b]) => getImageIndex(a) - getImageIndex(b));
-  const urls = await Promise.all(entries.map(([, load]) => load()));
-  return [project.cover, ...urls].filter(Boolean);
+  return Object.entries(projectAssets[project.imageFolder] || {})
+    .sort(([a], [b]) => getImageIndex(`/${a}`) - getImageIndex(`/${b}`))
+    .map(([, url]) => url);
 };
 
 const projects = rawProjects.map((project) => {
+  const folderAssets = projectAssets[project.imageFolder] || {};
+  const coverName = String(project.coverImage);
+  const coverFilename = Object.keys(folderAssets).find((filename) => (
+    filename === coverName || filename.replace(/\.[^.]+$/, '') === coverName
+  ));
+
   return {
     ...project,
-    cover: projectCovers[project.imageFolder] || null,
+    cover: folderAssets[coverFilename] || null,
     isComingSoon: comingSoonProjectSlugs.has(project.slug),
   };
 });
@@ -347,7 +348,7 @@ function ProjectCard({ project, lang, onOpenGallery, onCategoryClick }) {
         ) : (
           <div className="project-cover-fallback">{t.project.coverComing}</div>
         )}
-        {project.isComingSoon && <span className="coming-soon-badge">Coming Soon...</span>}
+        {project.isComingSoon && <span className="coming-soon-badge">coming soon</span>}
       </div>
       <div className="project-copy">
         <h3>{projectTitle}</h3>
@@ -424,7 +425,7 @@ function ProjectCarousel({ title, images, lang, isComingSoon = false }) {
             aria-label={`${t.project.openFullscreen}: ${title} ${index + 1}`}
           >
             <img src={images[index]} alt={`${title} ${t.project.image} ${index + 1}`} decoding="async" />
-            {isComingSoon && <span className="coming-soon-badge">Coming Soon...</span>}
+            {isComingSoon && <span className="coming-soon-badge">coming soon</span>}
           </button>
         </div>
         {images.length > 1 && (
@@ -473,7 +474,7 @@ function ProjectCarousel({ title, images, lang, isComingSoon = false }) {
           )}
           <div className="fullscreen-image-wrap" onClick={(event) => event.stopPropagation()}>
             <img src={images[index]} alt={`${title} ${t.project.image} ${index + 1}`} decoding="async" />
-            {isComingSoon && <span className="coming-soon-badge">Coming Soon...</span>}
+            {isComingSoon && <span className="coming-soon-badge">coming soon</span>}
           </div>
           {images.length > 1 && (
             <button
