@@ -26,7 +26,7 @@ const rawProjects = [
 
 const copy = {
   en: {
-    nav: { projects: 'Projects', products: 'Products', styling: 'Styling', studio: 'Studio', contact: 'Contact' },
+    nav: { projects: 'Projects', products: 'Products', styling: 'Styling', studio: 'Philosophy', magazine: 'Magazine', contact: 'Contact' },
     categories: { all: 'All', residential: 'Residential', hotels: 'Hotels', restaurant: 'Restaurant & Bar' },
     home: {
       aria: 'Home',
@@ -104,7 +104,7 @@ const copy = {
     contact: 'Contact',
   },
   cn: {
-    nav: { projects: '项目', products: '产品', styling: '陈设', studio: '简介', contact: '联系' },
+    nav: { projects: '项目', products: '产品', styling: '陈设', studio: 'PHILOSOPHY', magazine: 'MAGAZINE', contact: '联系' },
     categories: { all: '全部', residential: '住宅', hotels: '酒店', restaurant: '餐厅与酒吧' },
     home: {
       aria: '首页',
@@ -302,6 +302,7 @@ function MenuPanel({ route, lang, isOpen }) {
     ['#products', t.nav.products],
     ['#styling', t.nav.styling],
     ['#studio', t.nav.studio],
+    ['#magazine', t.nav.magazine],
     ['#contact', t.nav.contact],
   ];
 
@@ -315,6 +316,36 @@ function MenuPanel({ route, lang, isOpen }) {
         ))}
       </nav>
     </div>
+  );
+}
+
+function IntroGate({ onEnter }) {
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      onEnter();
+    }
+  };
+
+  return (
+    <button className="intro-gate" type="button" onClick={onEnter} onKeyDown={handleKeyDown} aria-label="Enter MIN Studio">
+      <span className="intro-kicker">Architecture & Interior Design</span>
+      <span className="intro-heading">
+        <span>We design the</span>
+        <span>experience of</span>
+        <em>space.</em>
+      </span>
+      <span className="intro-copy">
+        Through atmosphere, light, nature, and ritual, we create places that
+        <br />
+        support connection and solitude, energy and stillness.
+      </span>
+      <span className="intro-prompt" aria-hidden="true">
+        <span />
+        Click to Enter
+      </span>
+      <span className="intro-mark" aria-hidden="true">M</span>
+    </button>
   );
 }
 
@@ -623,30 +654,212 @@ function HomeLanding({ lang }) {
 }
 
 function Studio({ lang }) {
-  const t = copy[lang].home;
+  const [openServiceIndex, setOpenServiceIndex] = useState(-1);
+  const philosophy = {
+    en: {
+      label: 'Studio Philosophy',
+      hero: ['We design spaces that', 'hold solitude', 'and shape stories.'],
+      values: [
+        'Nature as art.',
+        'Architecture as shelter.',
+        'Light as atmosphere.',
+        'Details as intention.',
+        'Experiences as memory.',
+      ],
+      tagline: 'Thoughtful by nature. Human by heart.',
+      manifesto: ['We aspire to create places that', 'reveal themselves over time.'],
+      cards: [
+        {
+          title: 'On Novelty',
+          text: 'Min Studio does not pursue novelty for its own sake. We believe meaningful spaces emerge through observation, refinement, and time.',
+        },
+        {
+          title: 'On Guiding Values',
+          text: 'Our work is guided by patience rather than urgency, atmosphere rather than spectacle, and presence rather than decoration.',
+        },
+        {
+          title: 'On Frameworks',
+          text: 'We design frameworks that allow light, material, nature, and human life to interact naturally.',
+        },
+        {
+          title: 'On Completion',
+          text: 'A project is not complete when construction ends. It continues to evolve through occupation, memory, weather, and use.',
+        },
+      ],
+      servicesLabel: 'What We Do',
+      servicesHeading: ['A full-spectrum creative', 'partnership', '— from concept to culture.'],
+      closingQuote: ['A room should not only accommodate activities.', 'It should accommodate moods.'],
+      services: [
+        {
+          title: 'Studio Philosophy',
+          text: 'We help you refine and articulate your core manifesto and design principles — the foundation from which all creative decisions emerge. Clear thinking made visible.',
+        },
+        {
+          title: 'Brand Language',
+          text: 'Finding the words that sound unmistakably like Min Studio — from taglines to tone-of-voice guidelines. Language that carries the weight of the work.',
+        },
+        {
+          title: 'Hotel Concepts',
+          text: 'Guest journeys, room planning, public spaces, destination narratives, and full hospitality experiences — designed around how people want to feel, not just where they sleep.',
+        },
+        {
+          title: 'Moodboards & Art Direction',
+          text: 'Curating visual references and narratives that align with your philosophy rather than simply looking beautiful. Vision boards with conviction.',
+        },
+        {
+          title: 'Client Presentations',
+          text: 'Turning ideas into compelling, story-driven client-facing narratives. We structure thinking so it lands with clarity, warmth, and purpose.',
+        },
+        {
+          title: 'Studio Culture',
+          text: 'Articulating how your team designs, critiques, collaborates, and develops projects — building an internal culture document that becomes a compass.',
+        },
+        {
+          title: 'Website & Publications',
+          text: 'Crafting the language, structure, and storytelling for your studio website and monograph — assembling projects and philosophy into a lasting published work.',
+        },
+      ],
+    },
+    cn: {
+      label: '空间理念',
+      hero: ['我们设计的空间', '容纳独处', '也承载故事。'],
+      values: [
+        '自然如艺术。',
+        '建筑如庇护。',
+        '光线如氛围。',
+        '细节如意图。',
+        '体验如记忆。',
+      ],
+      tagline: '顺应自然，回应人心。',
+      manifesto: ['我们希望创造的空间', '会随时间慢慢显现。'],
+      cards: [
+        {
+          title: '关于新意',
+          text: 'MIN Studio 不为了新而追求新。我们相信有意义的空间来自观察、推敲与时间。',
+        },
+        {
+          title: '关于价值',
+          text: '我们的工作更相信耐心，而非急迫；更重视氛围，而非奇观；更在意存在感，而非装饰。',
+        },
+        {
+          title: '关于框架',
+          text: '我们设计的是一种框架，让光、材料、自然与人的生活自然地发生关系。',
+        },
+        {
+          title: '关于完成',
+          text: '一个项目并不会在施工结束时真正完成。它会在使用、记忆、天气与时间中继续生长。',
+        },
+      ],
+      servicesLabel: '我们做什么',
+      servicesHeading: ['从概念到文化的', '完整创意协作', '。'],
+      closingQuote: ['一个房间不应只容纳活动。', '它也应容纳情绪。'],
+      services: [
+        {
+          title: '空间理念',
+          text: '我们协助梳理并表达你的核心理念与设计原则，让所有创意决策都有清晰的出发点。让思考被看见。',
+        },
+        {
+          title: '品牌语言',
+          text: '找到听起来真正属于 MIN Studio 的语言：从标语到语气规范，让文字承载作品的重量。',
+        },
+        {
+          title: '酒店概念',
+          text: '从宾客动线、客房规划、公共空间到目的地叙事与完整的酒店体验，我们围绕人的感受来设计，而不只是睡在哪里。',
+        },
+        {
+          title: '情绪板与艺术指导',
+          text: '策划与理念一致的视觉参考和叙事，而不只是好看。让视觉方向拥有判断与信念。',
+        },
+        {
+          title: '客户提案',
+          text: '把想法转化为有故事、有结构、能打动客户的表达。让思考以清晰、温度和目的感抵达。',
+        },
+        {
+          title: '工作室文化',
+          text: '梳理团队如何设计、评审、协作与推进项目，形成一份能够指引内部工作的文化文本。',
+        },
+        {
+          title: '网站与出版物',
+          text: '为工作室网站与作品集构建语言、结构和叙事，把项目与理念整合为可长期留存的表达。',
+        },
+      ],
+    },
+  }[lang];
 
   return (
-    <section className="page-section studio-section" id="studio" aria-label={copy[lang].nav.studio}>
-      <div className="studio-copy">
-        <div className="home-philosophy-list">
-          {t.principles.map(([title, paragraphs]) => (
-            <article key={title}>
-              <h3>{title}</h3>
-              {paragraphs.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
-              ))}
-            </article>
-          ))}
-          <div className="home-philosophy-closing">
-            {t.closing.map((group) => (
-              <p key={group.join(' ')}>
-                {group.map((line) => (
-                  <span key={line}>{line} </span>
-                ))}
-              </p>
+    <section className="page-section philosophy-section" id="studio" aria-label={copy[lang].nav.studio}>
+      <div className="philosophy-inner">
+        <div className="philosophy-label">
+          <span />
+          {philosophy.label}
+        </div>
+
+        <div className="philosophy-hero">
+          <h2>
+            {philosophy.hero[0]}
+            <em>{philosophy.hero[1]}</em>
+            {philosophy.hero[2]}
+          </h2>
+          <ul>
+            {philosophy.values.map((value) => (
+              <li key={value}>{value}</li>
+            ))}
+          </ul>
+          <div className="philosophy-label philosophy-tagline">
+            <span />
+            {philosophy.tagline}
+          </div>
+        </div>
+
+        <div className="philosophy-manifesto">
+          <h2>
+            {philosophy.manifesto[0]}
+            <em>{philosophy.manifesto[1]}</em>
+          </h2>
+          <div className="philosophy-card-grid">
+            {philosophy.cards.map((card) => (
+              <article key={card.title}>
+                <h3>{card.title}</h3>
+                <p>{card.text}</p>
+              </article>
             ))}
           </div>
         </div>
+
+        <div className="philosophy-services">
+          <div className="philosophy-services-heading">
+            <div className="philosophy-label">
+              <span />
+              {philosophy.servicesLabel}
+            </div>
+            <h2>
+              {philosophy.servicesHeading[0]} <em>{philosophy.servicesHeading[1]}</em>{philosophy.servicesHeading[2]}
+            </h2>
+          </div>
+          <div className="philosophy-service-list">
+            {philosophy.services.map((service, index) => (
+              <article key={service.title} className={openServiceIndex === index ? 'open' : ''}>
+                <button
+                  type="button"
+                  className="philosophy-service-trigger"
+                  onClick={() => setOpenServiceIndex((current) => (current === index ? -1 : index))}
+                  aria-expanded={openServiceIndex === index}
+                >
+                  <span>{String(index + 1).padStart(2, '0')}</span>
+                  <h3>{service.title}</h3>
+                  <b aria-hidden="true">{openServiceIndex === index ? '×' : '+'}</b>
+                </button>
+                {openServiceIndex === index ? <p>{service.text}</p> : null}
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <blockquote className="philosophy-closing-quote">
+          {philosophy.closingQuote.map((line) => (
+            <span key={line}>{line}</span>
+          ))}
+        </blockquote>
       </div>
     </section>
   );
@@ -718,6 +931,14 @@ function Styling({ lang }) {
   );
 }
 
+function Magazine({ lang }) {
+  return (
+    <section className="page-section placeholder-section" id="magazine" aria-label={copy[lang].nav.magazine}>
+      <p>Coming soon...</p>
+    </section>
+  );
+}
+
 function Contact({ lang }) {
   return (
     <section className="contact-section" id="contact">
@@ -750,6 +971,7 @@ export default function App() {
   const [route, setRoute] = useState(window.location.hash || '#home');
   const [lang, setLang] = useState('en');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [hasEntered, setHasEntered] = useState(false);
 
   useEffect(() => {
     const onHash = () => {
@@ -793,9 +1015,23 @@ export default function App() {
     if (route === '#products' || route === '#services') return <Products lang={lang} />;
     if (route === '#styling') return <Styling lang={lang} />;
     if (route === '#studio') return <Studio lang={lang} />;
+    if (route === '#magazine') return <Magazine lang={lang} />;
     if (route === '#contact') return <Contact lang={lang} />;
     return <HomeLanding lang={lang} />;
   };
+
+  const enterSite = () => {
+    setHasEntered(true);
+    setIsMenuOpen(false);
+    if (window.location.hash !== '#home') {
+      window.location.hash = '#home';
+      setRoute('#home');
+    }
+  };
+
+  if (!hasEntered) {
+    return <IntroGate onEnter={enterSite} />;
+  }
 
   return (
     <div lang={lang === 'cn' ? 'zh-CN' : 'en'}>
