@@ -336,7 +336,7 @@ function IntroGate({ onEnter }) {
         <em>space.</em>
       </span>
       <span className="intro-copy">
-        Through atmosphere, light, nature, and ritual, we create places that
+        Through atmosphere, light, nature, and ritual, we create places that{' '}
         <br />
         support connection and solitude, energy and stillness.
       </span>
