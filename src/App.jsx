@@ -344,7 +344,7 @@ function IntroGate({ onEnter }) {
         <span />
         Click to Enter
       </span>
-      <span className="intro-mark" aria-hidden="true">M</span>
+      <span className="intro-mark" aria-hidden="true">MIN STUDIO</span>
     </button>
   );
 }
@@ -912,21 +912,8 @@ function Products({ lang }) {
 
 function Styling({ lang }) {
   return (
-    <section className="page-section styling-section" id="styling" aria-label={copy[lang].nav.styling}>
-      <div className="project-grid">
-        {copy[lang].stylingProjects.map((project) => (
-          <article className="project-card styling-card" key={`${project.title}-${project.location}`}>
-            <div className="project-cover styling-cover" aria-label={`${project.title} image placeholder`} />
-            <div className="project-copy">
-              <h3>{project.title}</h3>
-              <p>{project.location}</p>
-            </div>
-            <div className="card-meta">
-              <span>{project.category}</span>
-            </div>
-          </article>
-        ))}
-      </div>
+    <section className="page-section placeholder-section" id="styling" aria-label={copy[lang].nav.styling}>
+      <p>Coming soon...</p>
     </section>
   );
 }

@@ -5,7 +5,7 @@
   --surface-bg: #f3f0eb;
   --panel-bg: rgba(247, 245, 241, 0.9);
   --warm-white: rgba(249, 245, 238, 0.86);
-  --intro-accent: #c58f6c;
+  --intro-accent: #c88e69;
   --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
   --font-serif-display: Didot, "Bodoni 72", "Bodoni 72 Smallcaps", "Times New Roman", serif;
   --font-display-en: var(--font-sans);
@@ -75,7 +75,7 @@ a {
 
 .intro-kicker {
   top: clamp(20px, 2.2vw, 32px);
-  color: #9f6a4a;
+  color: var(--intro-accent);
   font-size: clamp(11px, 0.84vw, 16px);
   font-weight: 400;
   line-height: 1.4;
@@ -138,12 +138,15 @@ a {
   position: absolute;
   right: clamp(28px, 4.8vw, 96px);
   bottom: clamp(34px, 4vw, 74px);
-  color: rgba(187, 179, 162, 0.5);
+  color: rgba(249, 245, 238, 0.86);
   font-family: var(--font-serif-display);
-  font-size: clamp(67px, 7.2vw, 138px);
+  font-size: 48px;
   font-style: normal;
   font-weight: 200;
-  line-height: 0.78;
+  line-height: 1.2;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .site-header {
@@ -830,7 +833,7 @@ main {
   .intro-mark {
     right: 20px;
     bottom: 36px;
-    font-size: 58px;
+    font-size: 36px;
   }
 
   .philosophy-section {
