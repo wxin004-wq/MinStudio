@@ -140,7 +140,7 @@ a {
   bottom: clamp(34px, 4vw, 74px);
   color: rgba(249, 245, 238, 0.86);
   font-family: var(--font-serif-display);
-  font-size: 48px;
+  font-size: 20px;
   font-style: normal;
   font-weight: 200;
   line-height: 1.2;
@@ -833,7 +833,7 @@ main {
   .intro-mark {
     right: 20px;
     bottom: 36px;
-    font-size: 36px;
+    font-size: 15px;
   }
 
   .philosophy-section {
