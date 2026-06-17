@@ -336,9 +336,9 @@ function IntroGate({ onEnter }) {
         <em>space.</em>
       </span>
       <span className="intro-copy">
-        Through atmosphere, light, nature, and ritual, we create places that{' '}
+        Through light, nature, and atmosphere, we design spaces for connection and
         <br />
-        support connection and solitude, energy and stillness.
+        solitude, energy and stillness.
       </span>
       <span className="intro-prompt" aria-hidden="true">
         <span />
@@ -654,7 +654,6 @@ function HomeLanding({ lang }) {
 }
 
 function Studio({ lang }) {
-  const [openServiceIndex, setOpenServiceIndex] = useState(-1);
   const philosophy = {
     en: {
       label: 'Studio Philosophy',
@@ -671,54 +670,22 @@ function Studio({ lang }) {
       cards: [
         {
           title: 'On Novelty',
-          text: 'Min Studio does not pursue novelty for its own sake. We believe meaningful spaces emerge through observation, refinement, and time.',
+          text: 'We do not pursue novelty. We pursue meaning.',
         },
         {
-          title: 'On Guiding Values',
-          text: 'Our work is guided by patience rather than urgency, atmosphere rather than spectacle, and presence rather than decoration.',
+          title: 'On Values',
+          text: 'Our work is guided by patience, atmosphere, and presence.',
         },
         {
           title: 'On Frameworks',
-          text: 'We design frameworks that allow light, material, nature, and human life to interact naturally.',
+          text: 'We create frameworks for light, material, nature, and life.',
         },
         {
           title: 'On Completion',
-          text: 'A project is not complete when construction ends. It continues to evolve through occupation, memory, weather, and use.',
+          text: 'A project is never finished. It continues through occupation, memory, and time.',
         },
       ],
-      servicesLabel: 'What We Do',
-      servicesHeading: ['A full-spectrum creative', 'partnership', '— from concept to culture.'],
-      closingQuote: ['A room should not only accommodate activities.', 'It should accommodate moods.'],
-      services: [
-        {
-          title: 'Studio Philosophy',
-          text: 'We help you refine and articulate your core manifesto and design principles — the foundation from which all creative decisions emerge. Clear thinking made visible.',
-        },
-        {
-          title: 'Brand Language',
-          text: 'Finding the words that sound unmistakably like Min Studio — from taglines to tone-of-voice guidelines. Language that carries the weight of the work.',
-        },
-        {
-          title: 'Hotel Concepts',
-          text: 'Guest journeys, room planning, public spaces, destination narratives, and full hospitality experiences — designed around how people want to feel, not just where they sleep.',
-        },
-        {
-          title: 'Moodboards & Art Direction',
-          text: 'Curating visual references and narratives that align with your philosophy rather than simply looking beautiful. Vision boards with conviction.',
-        },
-        {
-          title: 'Client Presentations',
-          text: 'Turning ideas into compelling, story-driven client-facing narratives. We structure thinking so it lands with clarity, warmth, and purpose.',
-        },
-        {
-          title: 'Studio Culture',
-          text: 'Articulating how your team designs, critiques, collaborates, and develops projects — building an internal culture document that becomes a compass.',
-        },
-        {
-          title: 'Website & Publications',
-          text: 'Crafting the language, structure, and storytelling for your studio website and monograph — assembling projects and philosophy into a lasting published work.',
-        },
-      ],
+      closingQuote: ['We design the experience of space; memories are the highest form of luxury'],
     },
     cn: {
       label: '空间理念',
@@ -750,39 +717,7 @@ function Studio({ lang }) {
           text: '一个项目并不会在施工结束时真正完成。它会在使用、记忆、天气与时间中继续生长。',
         },
       ],
-      servicesLabel: '我们做什么',
-      servicesHeading: ['从概念到文化的', '完整创意协作', '。'],
-      closingQuote: ['一个房间不应只容纳活动。', '它也应容纳情绪。'],
-      services: [
-        {
-          title: '空间理念',
-          text: '我们协助梳理并表达你的核心理念与设计原则，让所有创意决策都有清晰的出发点。让思考被看见。',
-        },
-        {
-          title: '品牌语言',
-          text: '找到听起来真正属于 MIN Studio 的语言：从标语到语气规范，让文字承载作品的重量。',
-        },
-        {
-          title: '酒店概念',
-          text: '从宾客动线、客房规划、公共空间到目的地叙事与完整的酒店体验，我们围绕人的感受来设计，而不只是睡在哪里。',
-        },
-        {
-          title: '情绪板与艺术指导',
-          text: '策划与理念一致的视觉参考和叙事，而不只是好看。让视觉方向拥有判断与信念。',
-        },
-        {
-          title: '客户提案',
-          text: '把想法转化为有故事、有结构、能打动客户的表达。让思考以清晰、温度和目的感抵达。',
-        },
-        {
-          title: '工作室文化',
-          text: '梳理团队如何设计、评审、协作与推进项目，形成一份能够指引内部工作的文化文本。',
-        },
-        {
-          title: '网站与出版物',
-          text: '为工作室网站与作品集构建语言、结构和叙事，把项目与理念整合为可长期留存的表达。',
-        },
-      ],
+      closingQuote: ['我们设计空间的体验；记忆是最高形式的奢华。'],
     },
   }[lang];
 
@@ -821,35 +756,6 @@ function Studio({ lang }) {
               <article key={card.title}>
                 <h3>{card.title}</h3>
                 <p>{card.text}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-
-        <div className="philosophy-services">
-          <div className="philosophy-services-heading">
-            <div className="philosophy-label">
-              <span />
-              {philosophy.servicesLabel}
-            </div>
-            <h2>
-              {philosophy.servicesHeading[0]} <em>{philosophy.servicesHeading[1]}</em>{philosophy.servicesHeading[2]}
-            </h2>
-          </div>
-          <div className="philosophy-service-list">
-            {philosophy.services.map((service, index) => (
-              <article key={service.title} className={openServiceIndex === index ? 'open' : ''}>
-                <button
-                  type="button"
-                  className="philosophy-service-trigger"
-                  onClick={() => setOpenServiceIndex((current) => (current === index ? -1 : index))}
-                  aria-expanded={openServiceIndex === index}
-                >
-                  <span>{String(index + 1).padStart(2, '0')}</span>
-                  <h3>{service.title}</h3>
-                  <b aria-hidden="true">{openServiceIndex === index ? '×' : '+'}</b>
-                </button>
-                {openServiceIndex === index ? <p>{service.text}</p> : null}
               </article>
             ))}
           </div>
