@@ -543,7 +543,7 @@ main {
 
 .philosophy-section {
   min-height: calc(100svh - 92px);
-  padding: clamp(86px, 9vw, 132px) 0 clamp(96px, 10vw, 150px);
+  padding: clamp(108px, 10vw, 150px) 0 clamp(96px, 10vw, 150px);
   color: #2f2924;
   background: var(--page-bg);
 }
@@ -623,7 +623,7 @@ main {
 }
 
 .philosophy-hero .philosophy-tagline {
-  margin-top: clamp(188px, 15vw, 260px);
+  margin-top: clamp(220px, 18vw, 320px);
 }
 
 .philosophy-hero ul::before {
@@ -771,7 +771,7 @@ main {
   border-top: 0;
   color: #7b5b47;
   font-family: var(--font-serif-display);
-  font-size: clamp(16px, 1.24vw, 24px);
+  font-size: clamp(10px, 0.78vw, 13px);
   font-style: italic;
   font-weight: 200;
   line-height: 1.65;
@@ -839,7 +839,7 @@ main {
   }
 
   .philosophy-section {
-    padding: 72px 0 96px;
+    padding: 88px 0 96px;
   }
 
   .philosophy-inner {
@@ -932,7 +932,7 @@ main {
     gap: 8px;
     width: min(100%, 360px);
     padding-top: 24px;
-    font-size: 16px;
+    font-size: 10px;
     line-height: 1.62;
   }
 
