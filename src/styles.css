@@ -782,6 +782,19 @@ main {
   display: block;
 }
 
+@media (min-width: 1600px) {
+  .intro-heading {
+    top: clamp(104px, 7vw, 132px);
+    font-size: clamp(108px, 6.4vw, 124px);
+  }
+
+  .intro-copy {
+    bottom: clamp(170px, 19vh, 200px);
+    max-width: 900px;
+    font-size: 18px;
+  }
+}
+
 @media (max-width: 1080px) {
   .home-landing-copy {
     width: min(560px, 64vw);
