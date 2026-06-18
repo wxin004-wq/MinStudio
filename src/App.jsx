@@ -845,8 +845,8 @@ function Contact({ lang }) {
           </div>
 
           <div className="company-address">
-            <p>上海市徐汇区淮海中路1273弄19B</p>
-            <p className="company-address-en">NO.19B, LANE 1273 HUAIHAI ZHONG ROAD,</p>
+            <p>上海市徐汇区淮海中路1273弄</p>
+            <p className="company-address-en">LANE 1273 HUAIHAI ZHONG ROAD,</p>
             <p className="company-address-en">XUHUI DISTRICT, SHANGHAI, P.R. CHINA 200031</p>
           </div>
 
